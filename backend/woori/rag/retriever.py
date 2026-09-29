@@ -69,12 +69,17 @@ class Retriever:
                 return
             with self._lock:
                 rows = conn.execute(
-                    "SELECT id, source_type, source_label, source_url, header, body, zone_ids, resident_types FROM chunk"
+                    "SELECT id, source_type, source_label, source_url, header, body, zone_ids, resident_types, tokens"
+                    " FROM chunk"
                 ).fetchall()
+                tokens = {r["id"]: r.pop("tokens") for r in rows}
                 self.chunks = {r["id"]: Chunk(**r) for r in rows}
-                # 머리말(조문 제목, 고시 제목)은 두 번 색인해 가중치를 준다.
+                # 미리 계산한 토큰을 쓴다. 없으면 여기서 만든다(머리말 두 번 = 가중치, ingest.pipeline.index_tokens 와 같은 규칙).
                 self.index = BM25Index(
-                    {cid: tokenize(f"{c.header}\n{c.header}\n{c.body}") for cid, c in self.chunks.items()}
+                    {
+                        cid: tokens.get(cid) or tokenize(f"{c.header}\n{c.header}\n{c.body}")
+                        for cid, c in self.chunks.items()
+                    }
                 )
                 self._loaded_sig = sig
                 log.info("bm25 index loaded: %d chunks", len(self.chunks))

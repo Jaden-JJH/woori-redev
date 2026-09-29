@@ -22,7 +22,8 @@ def pool() -> ConnectionPool:
         _pool = ConnectionPool(
             get_settings().database_url,
             min_size=1,
-            max_size=8,
+            # Supabase session pooler 는 연결 수가 제한된다. Cloud Run 최대 2대 x 4 = 8 연결.
+            max_size=4,
             kwargs={"row_factory": dict_row},
             configure=_configure,
             open=True,

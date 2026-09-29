@@ -233,6 +233,13 @@ def build_chunks(conn: Connection, c: Content) -> list[ChunkDraft]:
     return drafts
 
 
+def index_tokens(header: str, body: str) -> list[str]:
+    """BM25 색인어. 머리말(조문 제목, 고시 제목)은 두 번 넣어 가중치를 준다. retriever 와 같은 규칙."""
+    from woori.rag.tokenizer import tokenize
+
+    return tokenize(f"{header}\n{header}\n{body}")
+
+
 def store_chunks(conn: Connection, drafts: list[ChunkDraft]) -> dict:
     keep = {(d.source_type, d.source_key, d.chunk_no) for d in drafts}
     existing = {
@@ -249,20 +256,25 @@ def store_chunks(conn: Connection, drafts: list[ChunkDraft]) -> dict:
             conn.execute(
                 """INSERT INTO chunk (source_type, source_key, chunk_no, header, body, zone_ids, stage_codes,
                                       resident_types, legal_refs, source_label, source_url, content_hash,
-                                      embedding, embed_model)
-                   VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,NULL,NULL)
+                                      tokens, embedding, embed_model)
+                   VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,NULL,NULL)
                    ON CONFLICT (source_type, source_key, chunk_no) DO UPDATE SET header=EXCLUDED.header,
                      body=EXCLUDED.body, zone_ids=EXCLUDED.zone_ids, stage_codes=EXCLUDED.stage_codes,
                      resident_types=EXCLUDED.resident_types, legal_refs=EXCLUDED.legal_refs,
                      source_label=EXCLUDED.source_label, source_url=EXCLUDED.source_url,
-                     content_hash=EXCLUDED.content_hash, embedding=NULL, embed_model=NULL""",
+                     content_hash=EXCLUDED.content_hash, tokens=EXCLUDED.tokens, embedding=NULL, embed_model=NULL""",
                 (d.source_type, d.source_key, d.chunk_no, d.header, d.body, d.zone_ids, d.stage_codes,
-                 d.resident_types, d.legal_refs, d.source_label, d.source_url, d.content_hash),
+                 d.resident_types, d.legal_refs, d.source_label, d.source_url, d.content_hash,
+                 index_tokens(d.header, d.body)),
             )
         stale = [k for k in existing if k not in keep]
         for st, sk, no in stale:
             conn.execute("DELETE FROM chunk WHERE source_type=%s AND source_key=%s AND chunk_no=%s", (st, sk, no))
-    return {"chunks": len(drafts), "changed": changed, "removed": len(stale)}
+        # 토큰이 비어 있는 기존 청크 채우기(마이그레이션 002 이전에 만든 청크)
+        missing = conn.execute("SELECT id, header, body FROM chunk WHERE tokens IS NULL").fetchall()
+        for r in missing:
+            conn.execute("UPDATE chunk SET tokens=%s WHERE id=%s", (index_tokens(r["header"], r["body"]), r["id"]))
+    return {"chunks": len(drafts), "changed": changed, "removed": len(stale), "tokens_filled": len(missing)}
 
 
 def embed_missing(conn: Connection, embedder, batch: int = 100) -> dict:

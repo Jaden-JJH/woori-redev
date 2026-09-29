@@ -1,0 +1,14 @@
+.git
+**/.venv
+**/__pycache__
+**/node_modules
+**/.next
+apps/
+data/
+eval/
+design/
+legacy/
+backend/tests/
+.env
+.env.*
+!Dockerfile

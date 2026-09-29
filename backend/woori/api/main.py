@@ -20,7 +20,6 @@ from woori.llm.router import answer_router, embedder, vision_router
 from woori.rag import pipeline
 from woori.rag.explain import explain as explain_image
 from woori.rag.pipeline import InputError
-from woori.rag.retriever import get_retriever
 
 log = logging.getLogger("woori.api")
 logging.basicConfig(level=logging.INFO, format="%(levelname)s %(name)s: %(message)s")
@@ -259,8 +258,5 @@ def stats(x_admin_token: str | None = Header(default=None)):
 
 @app.on_event("startup")
 def _warm():
+    # 콘텐츠만 올린다. 검색 색인은 첫 질문 때 만든다(구역, 체크리스트 화면은 색인 없이 바로 응답).
     get_content()
-    try:
-        get_retriever().ensure_loaded()
-    except Exception:
-        log.exception("retriever warmup failed")
