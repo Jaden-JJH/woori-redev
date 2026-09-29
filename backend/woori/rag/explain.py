@@ -141,7 +141,8 @@ def explain(zone_id: str, resident_type: str, image_bytes: bytes) -> dict:
         if item:
             cautions.append({"title": item.title, "body": " ".join(item.plain_body.split()), "legal_basis": item.legal_basis})
 
-    glossary_text = " ".join(d["terms"]) + " " + " ".join(d["summary_lines"])
+    # 표의 금액 항목 이름(예: 추정 권리가액)도 용어 풀이 후보로 본다.
+    glossary_text = " ".join(d["terms"] + d["summary_lines"] + [a["label"] for a in d.get("amounts_in_doc") or []])
     return finish(
         "explained",
         doc_type=d["doc_type"],
