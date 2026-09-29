@@ -1,6 +1,7 @@
-import { Chip, Header } from "@/components/Header";
+import { TopBar } from "@/components/TopBar";
+import { ZoneContext } from "@/components/ZoneContext";
 import { api } from "@/lib/api";
-import { residentLabel, type ResidentType } from "@/lib/types";
+import type { ResidentType } from "@/lib/types";
 import { DocClient } from "./DocClient";
 
 export default async function DocPage({ params }: PageProps<"/z/[zone]/[type]/doc">) {
@@ -8,12 +9,15 @@ export default async function DocPage({ params }: PageProps<"/z/[zone]/[type]/do
   const t = await api.timeline(zone);
   return (
     <main className="flex flex-1 flex-col">
-      <Header
-        eyebrow="문서 해설"
-        back={{ href: `/z/${zone}/${type}/ask`, label: "물어보기" }}
-        title={<>받으신 통지서,<br />같이 읽어드릴게요</>}
-        chips={<Chip href={`/z/${zone}`}>{`${t.zone.name}, ${residentLabel(type)}`}</Chip>}
-      />
+      <TopBar back={{ href: `/z/${zone}/${type}/ask`, label: "물어보기" }} />
+      <div className="px-6">
+        <ZoneContext zoneId={zone} zoneName={t.zone.name} type={type} path="/doc" />
+        <h1 className="mt-2 text-[1.5rem] leading-tight font-extrabold tracking-tight">
+          받으신 통지서,
+          <br />
+          <span className="text-accent">같이 읽어</span>드릴게요
+        </h1>
+      </div>
       <DocClient zoneId={zone} residentType={type as ResidentType} />
     </main>
   );

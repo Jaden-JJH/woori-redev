@@ -2,7 +2,7 @@
 
 ANALYZER_VERSION = "analyzer-v1"
 ANSWER_VERSION = "answer-v5"
-EXPLAIN_VERSION = "explain-v1"
+EXPLAIN_VERSION = "explain-v2"
 
 TOPICS = [
     "stage_status",
@@ -150,7 +150,7 @@ EXPLAIN_SYSTEM = """\
 2. doc_type 을 고른다. 정비사업과 관계없는 문서면 not_redevelopment 로 하고 나머지는 비운다.
 3. summary_lines 는 이 문서가 무엇이고, 주민에게 무엇을 알리거나 요구하는지 세 줄로 쓴다.
 4. actions 에는 문서가 요구하는 행동과 기한을 문서에 적힌 그대로 쓴다. 없으면 빈 배열.
-5. amounts_in_doc 에는 문서에 적힌 금액을 적힌 그대로 옮기고 무슨 금액인지 적는다.
+5. amounts_in_doc 에는 문서에 적힌 돈의 금액(원 단위)만 적힌 그대로 옮기고 무슨 금액인지 적는다. 면적, 세대수, 비율은 넣지 않는다.
    금액이 많다, 적다, 오를 것이다 같은 판단은 하지 않는다.
 6. terms 에는 문서에 나오는 어려운 용어를 최대 5개 고른다.
 7. 사람 이름, 주민등록번호, 전화번호, 상세 주소, 계좌번호는 어떤 필드에도 옮기지 않는다.

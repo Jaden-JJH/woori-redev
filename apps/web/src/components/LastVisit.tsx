@@ -32,7 +32,7 @@ export function LastVisit({ zones }: { zones: { id: string; name: string }[] }) 
   return (
     <Link
       href={`/z/${zone.id}/${last.type}`}
-      className="tap flex items-center justify-between rounded-2xl border border-navy-100 bg-navy-50 px-5 py-3 font-bold text-navy-700"
+      className="tap flex items-center justify-between rounded-2xl border border-line bg-tint px-5 py-3 font-bold text-accent"
     >
       <span>
         지난번에 본 {zone.name}, {residentLabel(last.type)}

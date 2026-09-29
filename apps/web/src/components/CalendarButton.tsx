@@ -32,7 +32,7 @@ export function CalendarButton({
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className="tap inline-flex items-center gap-1.5 rounded-full bg-navy-50 px-4 text-[0.85rem] font-bold text-navy-700"
+        className="tap inline-flex items-center gap-1.5 rounded-full bg-tint px-4 text-[0.85rem] font-bold text-accent"
       >
         <span aria-hidden>🗓</span> 캘린더에 알림 넣기
       </button>
@@ -40,7 +40,7 @@ export function CalendarButton({
   }
 
   return (
-    <div className="mt-2 rounded-2xl border border-navy-100 bg-navy-50 p-4">
+    <div className="mt-2 rounded-2xl border border-line bg-tint p-4">
       <label htmlFor={id} className="block text-[0.9rem] font-bold text-ink">
         통지서에 적힌 기한 날짜를 골라 주세요
       </label>
@@ -52,7 +52,7 @@ export function CalendarButton({
           setDate(e.target.value);
           setDone(false);
         }}
-        className="tap mt-2 w-full rounded-xl border border-navy-100 bg-white px-3 text-base"
+        className="tap mt-2 w-full rounded-xl border border-line bg-white px-3 text-base"
       />
       <p className="mt-2 text-[0.8rem] text-ink-soft">7일 전과 하루 전 아침 9시에 알려드려요. 날짜는 휴대폰에만 저장돼요.</p>
       <div className="mt-3 flex gap-2">
@@ -60,7 +60,7 @@ export function CalendarButton({
           type="button"
           onClick={save}
           disabled={!date}
-          className="tap flex-1 rounded-xl bg-navy-700 font-bold text-white disabled:opacity-40"
+          className="tap flex-1 rounded-xl bg-accent font-bold text-white disabled:opacity-40"
         >
           {done ? "다시 받기" : "캘린더 파일 받기"}
         </button>

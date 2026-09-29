@@ -118,8 +118,19 @@ export interface AskResult {
   points: { text: string; citations: Citation[] }[];
   next_step: string | null;
   terms: Term[];
+  related_items?: RelatedItem[];
   refusal: Refusal | null;
   data_as_of: string;
+}
+
+/** 답변이 인용한 조문과 같은 조문을 근거로 하는 검수된 체크리스트 항목 */
+export interface RelatedItem {
+  id: string;
+  kind: ChecklistItem["kind"];
+  title: string;
+  body: string;
+  conditions: string | null;
+  legal_basis: string;
 }
 
 export interface ExplainResult {

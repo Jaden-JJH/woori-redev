@@ -150,7 +150,8 @@ def explain(zone_id: str, resident_type: str, image_bytes: bytes) -> dict:
         issuer=d.get("issuer"),
         summary_lines=d["summary_lines"][:3],
         actions=d["actions"],
-        amounts_in_doc=d["amounts_in_doc"],
+        # 모델이 면적이나 세대수를 금액으로 옮기는 경우가 있어 돈 단위가 있는 값만 남긴다.
+        amounts_in_doc=[a for a in d["amounts_in_doc"] if re.search(r"원|₩", a["amount_text"])],
         is_estimate=d.get("is_estimate"),
         unreadable=d.get("unreadable"),
         terms=_glossary_hits(c, glossary_text) or [{"term": t, "plain": None, "legal_ref": None} for t in d["terms"][:5]],

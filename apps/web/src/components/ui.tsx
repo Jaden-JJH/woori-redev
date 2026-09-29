@@ -1,30 +1,34 @@
 import type { ReactNode } from "react";
+import { Icon } from "./Icon";
 
-export function Card({ children, className = "" }: { children: ReactNode; className?: string }) {
-  return <section className={`rounded-3xl bg-white p-5 shadow-[0_2px_10px_rgba(21,40,79,0.06)] ${className}`}>{children}</section>;
+export function Pill({ children }: { children: ReactNode }) {
+  return (
+    <span className="inline-flex items-center gap-1.5 rounded-lg bg-tint px-2.5 py-1.5 text-[0.78rem] font-bold text-accent">
+      {children}
+    </span>
+  );
 }
 
 export function SectionTitle({ children, hint }: { children: ReactNode; hint?: ReactNode }) {
   return (
     <div className="mb-3 flex items-baseline justify-between gap-2">
-      <h2 className="text-lg font-extrabold text-ink">{children}</h2>
-      {hint ? <span className="text-sm text-ink-mute">{hint}</span> : null}
+      <h2 className="text-[1.15rem] font-extrabold tracking-tight text-ink">{children}</h2>
+      {hint ? <span className="text-[0.8rem] text-ink-mute">{hint}</span> : null}
     </div>
   );
 }
 
-/** 법령, 고시 근거 표시. 모든 안내 문장 옆에 붙는다. */
-export function SourceBadge({ label, href }: { label: string; href?: string | null }) {
-  const cls =
-    "inline-flex items-start gap-1.5 rounded-lg text-left bg-navy-50 px-2.5 py-1 text-[0.8rem] font-semibold text-navy-700";
+/** 법령, 고시 근거 링크. */
+export function SourceLink({ label, href }: { label: string; href?: string | null }) {
   const inner = (
     <>
-      <span className="shrink-0">근거</span>
-      <span className="text-ink-soft">{label}</span>
+      <Icon name="book" size={15} className="mt-0.5" />
+      <span>{label}</span>
     </>
   );
+  const cls = "inline-flex items-start gap-1.5 text-left text-[0.8rem] font-semibold text-ink-mute";
   return href ? (
-    <a href={href} target="_blank" rel="noreferrer" className={`${cls} underline-offset-2 hover:underline`}>
+    <a href={href} target="_blank" rel="noreferrer" className={`${cls} underline underline-offset-4`}>
       {inner}
     </a>
   ) : (
@@ -33,8 +37,12 @@ export function SourceBadge({ label, href }: { label: string; href?: string | nu
 }
 
 export function lawSearchUrl(ref: string): string {
-  // "도시정비법 제72조제1항" -> 국가법령정보센터 검색
-  const law = ref.replace(/\s*제\d.*$/, "").replace(/\s*별표.*$/, "");
+  // "도시정비법 제72조제1항, 제2항" -> 국가법령정보센터 해당 법령 페이지
+  const law = ref
+    .split(",")[0]
+    .replace(/\s*제\d.*$/, "")
+    .replace(/\s*별표.*$/, "")
+    .trim();
   const full: Record<string, string> = {
     도시정비법: "도시및주거환경정비법",
     "도시정비법 시행령": "도시및주거환경정비법시행령",
@@ -47,11 +55,15 @@ export function lawSearchUrl(ref: string): string {
   return `https://www.law.go.kr/법령/${full[law] ?? law.replace(/\s/g, "")}`;
 }
 
-export function Footnote({ asOf }: { asOf: string }) {
+export const DISCLAIMER =
+  "이 안내는 법률, 투자 자문이 아니에요. 효력은 원문 고시와 법령에 있어요. 최종 확인은 조합, 사업시행자, 성남시에 해 주세요.";
+
+export function Footnote({ asOf, children }: { asOf: string; children?: ReactNode }) {
   return (
-    <p className="px-5 py-4 text-[0.8rem] leading-relaxed text-ink-mute">
-      <b className="text-ink-soft">이 안내는 법률, 투자 자문이 아니에요.</b> 효력은 원문 고시와 법령에 있어요. 최종 확인은 조합,
-      사업시행자, 성남시에 해 주세요. 데이터 기준일 {asOf}
-    </p>
+    <footer className="px-6 pt-2 pb-6 text-[0.72rem] leading-relaxed text-ink-mute">
+      {children}
+      <p>데이터 기준일 {asOf}</p>
+      <p>{DISCLAIMER}</p>
+    </footer>
   );
 }

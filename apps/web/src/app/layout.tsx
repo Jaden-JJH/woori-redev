@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#2b4c8c",
+  themeColor: "#fffaf5",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
@@ -25,7 +25,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <FontSizeScript />
       </head>
       <body className="min-h-dvh antialiased">
-        <div className="mx-auto flex min-h-dvh w-full max-w-[520px] flex-col bg-paper shadow-[0_0_0_1px_rgba(21,40,79,0.04)]">
+        <div className="mx-auto flex min-h-dvh w-full max-w-[520px] flex-col bg-paper shadow-[0_0_0_1px_rgba(111,73,48,0.06)]">
           {children}
         </div>
       </body>

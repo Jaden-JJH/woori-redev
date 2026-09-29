@@ -4,7 +4,7 @@ import { useRef, useState } from "react";
 import { ErrorCard } from "@/components/AnswerCards";
 import { CalendarButton } from "@/components/CalendarButton";
 import { ReadAloud } from "@/components/ReadAloud";
-import { SourceBadge, lawSearchUrl } from "@/components/ui";
+import { SourceLink, lawSearchUrl } from "@/components/ui";
 import { parseKoreanDate } from "@/lib/format";
 import type { ExplainResult, ResidentType } from "@/lib/types";
 
@@ -59,7 +59,7 @@ export function DocClient({ zoneId, residentType }: { zoneId: string; residentTy
 
   return (
     <div className="flex flex-col gap-4 px-4 py-5">
-      <div className="rounded-3xl bg-white p-5 shadow-[0_2px_10px_rgba(21,40,79,0.06)]">
+      <div className="rounded-[18px] border border-line bg-white p-5">
         <p className="font-bold text-ink">통지서, 안내문, 공고문 사진을 올려 주세요</p>
         <p className="mt-1 text-[0.9rem] leading-relaxed text-ink-soft">
           세 줄로 요약하고 어려운 말을 풀어드려요. 사진은 해설에만 쓰고 저장하지 않아요. 이름, 주민등록번호가 보이면 가리고 찍으셔도
@@ -81,7 +81,7 @@ export function DocClient({ zoneId, residentType }: { zoneId: string; residentTy
           type="button"
           onClick={() => input.current?.click()}
           disabled={busy}
-          className="tap mt-4 flex w-full items-center justify-center gap-2 rounded-2xl bg-navy-700 py-4 text-lg font-bold text-white disabled:opacity-50"
+          className="tap mt-4 flex w-full items-center justify-center gap-2 rounded-2xl bg-accent py-4 text-lg font-bold text-white disabled:opacity-50"
         >
           📷 {preview ? "다른 사진 올리기" : "사진 찍기 또는 고르기"}
         </button>
@@ -92,7 +92,7 @@ export function DocClient({ zoneId, residentType }: { zoneId: string; residentTy
       </div>
 
       {busy ? (
-        <div className="rounded-3xl bg-white p-5 shadow-[0_2px_10px_rgba(21,40,79,0.06)]" role="status">
+        <div className="rounded-[18px] border border-line bg-white p-5" role="status">
           <p className="pulse-soft font-bold text-ink">문서를 읽고 있어요. 잠시만 기다려 주세요.</p>
         </div>
       ) : null}
@@ -116,9 +116,9 @@ export function DocClient({ zoneId, residentType }: { zoneId: string; residentTy
 function ExplainView({ r }: { r: ExplainResult }) {
   const speech = [r.doc_type_label, ...(r.summary_lines ?? [])].join(". ");
   return (
-    <article className="rounded-3xl bg-white p-5 shadow-[0_2px_10px_rgba(21,40,79,0.06)]">
+    <article className="rounded-[18px] border border-line bg-white p-5">
       <div className="flex items-center justify-between gap-2">
-        <span className="rounded-full bg-navy-50 px-3 py-1 text-[0.8rem] font-bold text-navy-700">{r.doc_type_label}</span>
+        <span className="rounded-full bg-tint px-3 py-1 text-[0.8rem] font-bold text-accent">{r.doc_type_label}</span>
         <ReadAloud text={speech} />
       </div>
       {r.title_in_doc ? <h3 className="mt-3 text-lg font-extrabold text-ink">{r.title_in_doc}</h3> : null}
@@ -128,18 +128,18 @@ function ExplainView({ r }: { r: ExplainResult }) {
       <ol className="mt-2 flex flex-col gap-2">
         {r.summary_lines?.map((line, i) => (
           <li key={i} className="flex gap-2 text-[1rem] leading-relaxed text-ink">
-            <span className="font-extrabold text-navy-700">{i + 1}</span>
+            <span className="font-extrabold text-accent">{i + 1}</span>
             {line}
           </li>
         ))}
       </ol>
 
       {r.cautions?.map((c) => (
-        <div key={c.title} className="mt-4 rounded-2xl bg-cream px-4 py-3">
-          <p className="font-bold text-orange-accent">{c.title}</p>
+        <div key={c.title} className="mt-4 rounded-2xl bg-cond px-4 py-3">
+          <p className="font-bold text-cond-label">{c.title}</p>
           <p className="mt-1 text-[0.95rem] leading-relaxed text-ink">{c.body}</p>
           <div className="mt-2">
-            <SourceBadge label={c.legal_basis} href={lawSearchUrl(c.legal_basis)} />
+            <SourceLink label={c.legal_basis} href={lawSearchUrl(c.legal_basis)} />
           </div>
         </div>
       ))}
@@ -151,7 +151,7 @@ function ExplainView({ r }: { r: ExplainResult }) {
             {r.actions.map((a, i) => (
               <li key={i} className="rounded-2xl bg-paper px-4 py-3">
                 <p className="font-semibold text-ink">{a.what}</p>
-                {a.deadline_in_doc ? <p className="mt-1 text-[0.9rem] font-bold text-orange-accent">기한: {a.deadline_in_doc}</p> : null}
+                {a.deadline_in_doc ? <p className="mt-1 text-[0.9rem] font-bold text-cond-label">기한: {a.deadline_in_doc}</p> : null}
                 {a.deadline_in_doc ? (
                   <div className="mt-2">
                     <CalendarButton
@@ -183,7 +183,7 @@ function ExplainView({ r }: { r: ExplainResult }) {
       ) : null}
 
       {r.terms && r.terms.length > 0 ? (
-        <div className="mt-4 border-t border-navy-50 pt-4">
+        <div className="mt-4 border-t border-line pt-4">
           <p className="text-[0.85rem] font-bold text-ink-soft">어려운 말 풀이</p>
           <dl className="mt-2 flex flex-col gap-2">
             {r.terms.map((t) => (
@@ -199,7 +199,7 @@ function ExplainView({ r }: { r: ExplainResult }) {
       {r.related_citations && r.related_citations.length > 0 ? (
         <div className="mt-4 flex flex-wrap gap-2">
           {r.related_citations.map((c) => (
-            <SourceBadge key={c.source_label} label={c.source_label} href={lawSearchUrl(c.source_label)} />
+            <SourceLink key={c.source_label} label={c.source_label} href={lawSearchUrl(c.source_label)} />
           ))}
         </div>
       ) : null}

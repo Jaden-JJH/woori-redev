@@ -1,7 +1,9 @@
 import Link from "next/link";
-import { Chip, Header } from "@/components/Header";
+import { Icon } from "@/components/Icon";
+import { TopBar } from "@/components/TopBar";
+import { ZoneContext } from "@/components/ZoneContext";
 import { api } from "@/lib/api";
-import { residentLabel, type ResidentType } from "@/lib/types";
+import type { ResidentType } from "@/lib/types";
 import { AskClient } from "./AskClient";
 
 export default async function AskPage({ params }: PageProps<"/z/[zone]/[type]/ask">) {
@@ -9,21 +11,28 @@ export default async function AskPage({ params }: PageProps<"/z/[zone]/[type]/as
   const [t, suggestions] = await Promise.all([api.timeline(zone), api.suggestions(type)]);
   return (
     <main className="flex flex-1 flex-col">
-      <Header
-        eyebrow="물어보기"
-        title={<>궁금한 걸<br />쉬운 말로 답해드려요</>}
-        chips={
-          <>
-            <Chip href={`/z/${zone}`}>{`${t.zone.name}, ${residentLabel(type)}`}</Chip>
-            <Link
-              href={`/z/${zone}/${type}/doc`}
-              className="inline-flex min-h-[40px] items-center gap-1.5 rounded-full bg-amber-accent px-4 text-[0.9rem] font-bold text-navy-900"
-            >
-              📷 받은 문서 사진으로 물어보기
-            </Link>
-          </>
-        }
-      />
+      <TopBar back={{ href: `/z/${zone}/${type}`, label: "내 구역" }} />
+      <div className="px-6">
+        <ZoneContext zoneId={zone} zoneName={t.zone.name} type={type} path="/ask" />
+        <h1 className="mt-2 text-[1.5rem] leading-tight font-extrabold tracking-tight">
+          궁금한 걸
+          <br />
+          <span className="text-accent">쉬운 말</span>로 답해드려요
+        </h1>
+        <Link
+          href={`/z/${zone}/${type}/doc`}
+          className="press mt-4 flex items-center gap-3 rounded-[15px] border border-line bg-white px-4 py-3"
+        >
+          <span className="grid h-11 w-11 place-items-center rounded-xl bg-tint text-accent">
+            <Icon name="camera" size={24} />
+          </span>
+          <span className="min-w-0 flex-1">
+            <b className="block text-[0.95rem]">받은 문서를 사진으로 물어보기</b>
+            <span className="text-[0.8rem] text-ink-mute">통지서, 안내문을 세 줄로 풀어드려요</span>
+          </span>
+          <Icon name="arrow" size={20} className="text-accent" />
+        </Link>
+      </div>
       <AskClient
         zoneId={zone}
         zoneName={t.zone.name}

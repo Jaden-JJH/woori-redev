@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { AnswerCard, ErrorCard, RefusalCard } from "@/components/AnswerCards";
+import { Icon } from "@/components/Icon";
 import { formatDate } from "@/lib/format";
 import type { AskResult, ResidentType } from "@/lib/types";
 
@@ -101,23 +102,25 @@ export function AskClient({
 
   return (
     <>
-      <div className="flex flex-1 flex-col gap-4 px-4 py-5" aria-live="polite">
+      <div className="flex flex-1 flex-col gap-4 px-5 py-5" aria-live="polite">
         {turns.length === 0 ? (
-          <div className="rounded-3xl bg-white p-5 shadow-[0_2px_10px_rgba(21,40,79,0.06)]">
-            <p className="font-bold text-ink">이렇게 물어볼 수 있어요</p>
+          <div className="rounded-[18px] border border-line bg-white p-5">
+            <p className="font-bold">이렇게 물어볼 수 있어요</p>
             <div className="mt-3 flex flex-col gap-2">
               {suggestions.map((s) => (
                 <button
                   key={s}
                   type="button"
                   onClick={() => send(s)}
-                  className="tap rounded-2xl border border-navy-100 bg-navy-50 px-4 py-3 text-left font-semibold text-navy-800"
+                  className="press tap flex items-center justify-between gap-2 rounded-xl border border-line bg-paper px-4 py-2.5 text-left font-semibold text-ink-warm"
                 >
                   {s}
+                  <Icon name="arrow" size={18} className="text-accent" />
                 </button>
               ))}
             </div>
-            <p className="mt-4 text-[0.85rem] leading-relaxed text-ink-mute">
+            <p className="mt-4 flex items-start gap-2 rounded-xl bg-cond px-3 py-2.5 text-[0.83rem] leading-relaxed text-cond-ink">
+              <Icon name="hand" size={18} className="mt-0.5 text-cond-label" />
               집값 전망, 우리 집 분담금 계산, 대출 추천, 법적 판단은 답하지 않아요. 공식 문서에 근거가 있는 내용만 알려드려요.
             </p>
           </div>
@@ -125,11 +128,13 @@ export function AskClient({
 
         {turns.map((t) => (
           <div key={t.id} className="flex flex-col gap-3">
-            <p className="ml-10 self-end rounded-3xl rounded-br-md bg-navy-700 px-5 py-3.5 text-[1.02rem] font-semibold text-white">
+            <p className="ml-10 self-end rounded-[18px] rounded-br-md bg-accent px-5 py-3.5 text-[1rem] font-semibold text-white">
               {t.question}
             </p>
             {t.step ? <Progress step={t.step} /> : null}
-            {t.result?.outcome === "answered" ? <AnswerCard result={t.result} /> : null}
+            {t.result?.outcome === "answered" ? (
+              <AnswerCard result={t.result} checklistHref={`/z/${zoneId}/${residentType}/checklist`} />
+            ) : null}
             {t.result && t.result.outcome !== "answered" && t.result.refusal ? (
               <RefusalCard refusal={t.result.refusal} zoneName={zoneName} onAsk={send} residentType={residentType} />
             ) : null}
@@ -146,9 +151,9 @@ export function AskClient({
           e.preventDefault();
           send(input);
         }}
-        className="sticky bottom-[64px] z-10 border-t border-navy-100 bg-white px-3 py-3"
+        className="sticky bottom-[72px] z-10 border-t border-line bg-paper px-4 py-3"
       >
-        <p className="mb-2 px-1 text-[0.75rem] text-ink-mute">
+        <p className="mb-2 px-1 text-[0.7rem] text-ink-mute">
           AI가 공식 문서를 근거로 만든 안내예요. 질문 내용은 저장하지 않아요. 기준일 {formatDate(asOf)}
         </p>
         <div className="flex gap-2">
@@ -161,13 +166,13 @@ export function AskClient({
             onChange={(e) => setInput(e.target.value)}
             maxLength={300}
             placeholder="궁금한 점을 적어 주세요"
-            className="tap min-w-0 flex-1 rounded-2xl border border-navy-100 bg-paper px-4 text-base"
+            className="tap min-w-0 flex-1 rounded-[15px] border border-line bg-white px-4 text-base"
             disabled={busy}
           />
           <button
             type="submit"
             disabled={busy || input.trim().length < 2}
-            className="tap rounded-2xl bg-navy-700 px-5 font-bold text-white disabled:opacity-40"
+            className="press tap rounded-[15px] bg-accent px-5 font-bold text-white disabled:opacity-40"
           >
             묻기
           </button>
@@ -181,21 +186,27 @@ function Progress({ step }: { step: Step }) {
   const order: Step[] = ["analyze", "retrieve", "generate", "verify"];
   const cur = order.indexOf(step);
   return (
-    <div className="rounded-3xl bg-white p-5 shadow-[0_2px_10px_rgba(21,40,79,0.06)]" role="status">
+    <div className="rounded-[18px] border border-line bg-white p-5" role="status">
       <ol className="flex flex-col gap-3">
         {STEPS.map((s) => {
           const idx = order.indexOf(s.id);
-          const state = idx < cur || (s.id === "retrieve" && step === "generate") ? "done" : idx === cur || (s.id === "verify" && step === "generate") ? "now" : "todo";
+          const state =
+            idx < cur || (s.id === "retrieve" && step === "generate")
+              ? "done"
+              : idx === cur || (s.id === "verify" && step === "generate")
+                ? "now"
+                : "todo";
           return (
             <li key={s.id} className="flex items-center gap-3">
               <span
-                className={`flex h-7 w-7 items-center justify-center rounded-full text-[0.8rem] font-bold ${
-                  state === "done" ? "bg-navy-700 text-white" : state === "now" ? "pulse-soft bg-amber-accent text-navy-900" : "bg-paper text-ink-mute"
+                className={`grid h-7 w-7 place-items-center rounded-full text-[0.8rem] font-bold ${
+                  state === "done" ? "bg-accent text-white" : state === "now" ? "pulse-soft bg-peach text-accent" : "bg-tint-2 text-ink-mute"
                 }`}
               >
                 {state === "done" ? "✓" : ""}
               </span>
               <span className={`font-semibold ${state === "todo" ? "text-ink-mute" : "text-ink"}`}>{s.label}</span>
+              <span className="sr-only">{state === "done" ? "완료" : state === "now" ? "진행 중" : "대기"}</span>
             </li>
           );
         })}

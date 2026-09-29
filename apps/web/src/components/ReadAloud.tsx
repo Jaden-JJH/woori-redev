@@ -37,7 +37,7 @@ export function ReadAloud({ text }: { text: string }) {
     <button
       type="button"
       onClick={toggle}
-      className="tap inline-flex items-center gap-1.5 rounded-full border border-navy-100 px-4 text-[0.85rem] font-bold text-navy-700"
+      className="tap inline-flex items-center gap-1.5 rounded-full border border-line px-4 text-[0.85rem] font-bold text-accent"
     >
       <span aria-hidden>{speaking ? "■" : "▶"}</span>
       {speaking ? "그만 읽기" : "읽어주기"}

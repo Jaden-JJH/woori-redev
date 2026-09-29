@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect } from "react";
 import { useLocal, writeLocal } from "@/lib/local";
 
 const KEY = "woori.font";
@@ -14,13 +13,12 @@ export function FontSizeScript() {
 export function FontSizeToggle() {
   const large = useLocal(KEY) === "large";
 
-  useEffect(() => {
-    if (large) document.documentElement.dataset.font = "large";
-    else delete document.documentElement.dataset.font;
-  }, [large]);
-
+  // 문서의 글씨 크기는 누를 때만 바꾼다. 렌더링 중에 바꾸면 첫 화면에서 크기가 풀렸다가 다시 커지며 버튼 위치가 흔들린다.
   function toggle() {
-    writeLocal(KEY, large ? "normal" : "large");
+    const next = !large;
+    if (next) document.documentElement.dataset.font = "large";
+    else delete document.documentElement.dataset.font;
+    writeLocal(KEY, next ? "large" : "normal");
   }
 
   return (
@@ -28,9 +26,10 @@ export function FontSizeToggle() {
       type="button"
       onClick={toggle}
       aria-pressed={large}
-      className="tap rounded-full border border-white/30 px-3 text-sm font-semibold text-white/90"
+      aria-label={large ? "보통 글씨로 보기" : "큰 글씨로 보기"}
+      className="grid h-12 min-w-12 place-items-center rounded-xl px-2 text-[0.9rem] font-bold text-ink"
     >
-      {large ? "보통 글씨" : "큰 글씨"}
+      {large ? "가-" : "가+"}
     </button>
   );
 }
