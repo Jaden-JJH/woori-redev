@@ -118,7 +118,8 @@ class Retriever:
         s = get_settings()
         self.ensure_loaded()
         assert self.index is not None
-        q_tokens = tokenize(query) + [t for term in (extra_terms or []) for t in tokenize(term)]
+        base_tokens = tokenize(query)
+        q_tokens = base_tokens + [t for term in (extra_terms or []) for t in tokenize(term)]
         allowed = self._allowed(zone_id)
         bm = self.index.search(q_tokens, allowed, s.bm25_top_k)
         vec_ids = self._vector_search(query, zone_id, s.vector_top_k)
@@ -141,8 +142,9 @@ class Retriever:
         for h in zone_notices:
             if h not in hits:
                 hits = [*hits[:-1], h]
+        # 근거 점수: 원 질문 기준과 확장 포함 기준 중 높은 값(확장어가 분모를 키워 과잉 거부하지 않도록).
         for h in hits:
-            h.coverage = self.index.coverage(q_tokens, h.chunk.id)
+            h.coverage = max(self.index.coverage(base_tokens, h.chunk.id), self.index.coverage(q_tokens, h.chunk.id))
 
         agree = len({x.doc_id for x in bm[:10]} & set((vec_ids or [])[:10]))
         top_cov = max((h.coverage for h in hits), default=0.0)

@@ -38,7 +38,7 @@ class Settings(BaseSettings):
     bm25_top_k: int = 30
     vector_top_k: int = 30
     rrf_k: int = 60
-    context_top_k: int = 8
+    context_top_k: int = 6
     gate_min_rrf: float = 0.025
     gate_min_bm25: float = 4.0
 

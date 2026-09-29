@@ -1,0 +1,1562 @@
+{
+ "meta": {
+  "tag": "test-baseline",
+  "split": "test",
+  "started": "2026-09-29 16:11",
+  "model": "claude:claude-sonnet-5",
+  "prompt_version": "answer-v4",
+  "judge": "claude-opus-5"
+ },
+ "summary": {
+  "n": 45,
+  "errors": 0,
+  "out_of_scope_refusal_rate": 100.0,
+  "over_refusal_rate": 2.8,
+  "gold_source_hit_rate": 97.1,
+  "must_include_rate": 97.2,
+  "forbidden_violations": 0,
+  "retrieval_recall": 94.4,
+  "citation_support_rate": 82.1,
+  "citation_partial_rate": 17.9,
+  "citation_unsupported_rate": 0.0,
+  "judged_points": 84,
+  "latency_p50_s": 7.6,
+  "latency_p95_s": 10.4,
+  "by_category": {
+   "A": {
+    "n": 9,
+    "answered": 9,
+    "gold_hit": 9
+   },
+   "B": {
+    "n": 9,
+    "answered": 9,
+    "gold_hit": 8
+   },
+   "C": {
+    "n": 9,
+    "answered": 9,
+    "gold_hit": 9
+   },
+   "D": {
+    "n": 9,
+    "answered": 8,
+    "gold_hit": 8
+   }
+  }
+ },
+ "results": [
+  {
+   "id": "EG2-O-02",
+   "category": "A",
+   "split": "test",
+   "question": "은행1구역이랑 금광2구역은 따로 진행하는 거예요?",
+   "outcome": "answered",
+   "refusal_category": null,
+   "latency_s": 5.89,
+   "answered": true,
+   "gold_hit": true,
+   "retrieval_hit": true,
+   "include_ok": true,
+   "missing": [],
+   "violations": [],
+   "cited": [
+    "성남시 고시 제2026-41호",
+    "우리 구역 진행 현황"
+   ],
+   "summary": "아니요, 은행1구역과 금광2구역은 하나로 묶여서 함께 진행되고 있어요.",
+   "points": [
+    "은행1구역과 금광2구역은 하나의 추진위원회로 묶인 생활권 재개발 구역으로 함께 진행돼요.",
+    "성남시 고시에서도 은행1·금광2구역 생활권 재개발사업으로 하나의 조합설립추진위원회 승인이 이루어졌어요."
+   ],
+   "judge": [
+    {
+     "index": 0,
+     "label": "supported",
+     "reason": "출처 요약에 동일한 내용이 그대로 기재되어 있다."
+    },
+    {
+     "index": 1,
+     "label": "supported",
+     "reason": "고시문에 은행1·금광2구역 생활권 재개발사업 조합설립추진위원회 승인 고시가 명시되어 있다."
+    }
+   ]
+  },
+  {
+   "id": "EG2-O-04",
+   "category": "B",
+   "split": "test",
+   "question": "분담금은 언제 확정돼요?",
+   "outcome": "answered",
+   "refusal_category": null,
+   "latency_s": 5.79,
+   "answered": true,
+   "gold_hit": false,
+   "retrieval_hit": false,
+   "include_ok": true,
+   "missing": [],
+   "violations": [],
+   "cited": [
+    "도시정비법 시행령 제32조"
+   ],
+   "summary": "분담금은 관리처분 때 임시로 정산하고, 조합이 사업을 마치고 청산할 때 최종 확정돼요.",
+   "points": [
+    "지금 나온 추정분담금은 확정된 금액이 아니라 산출근거가 있는 추산액이에요."
+   ],
+   "judge": [
+    {
+     "index": 0,
+     "label": "partial",
+     "reason": "인용 조문은 분담금 '추산액 및 산출근거'를 제공 정보로 규정할 뿐, '확정된 금액이 아니다'라는 취지는 추산액이라는 표현에서 유추될 뿐 명시되어 있지 않다."
+    }
+   ]
+  },
+  {
+   "id": "EG2-O-06",
+   "category": "C",
+   "split": "test",
+   "question": "조합설립 동의하기 전에 분담금을 알려주나요?",
+   "outcome": "answered",
+   "refusal_category": null,
+   "latency_s": 5.3,
+   "answered": true,
+   "gold_hit": true,
+   "retrieval_hit": true,
+   "include_ok": true,
+   "missing": [],
+   "violations": [],
+   "cited": [
+    "도시정비법 시행령 제92조",
+    "도시정비법 제35조",
+    "우리 구역 진행 현황"
+   ],
+   "summary": "네, 추진위원회는 조합설립 동의를 받기 전에 추정분담금을 미리 알려줘야 해요.",
+   "points": [
+    "추진위원회는 조합설립 동의를 받기 전에 추정분담금 등의 정보를 토지등소유자에게 제공해야 해요.",
+    "이때 제공되는 정보에는 분양대상자별 분담금 추산액과 정비사업비 추산액이 포함돼요.",
+    "우리 구역은 2026년 6월 주민설명회에서 추정분담금이 처음 공개됐어요."
+   ],
+   "judge": [
+    {
+     "index": 0,
+     "label": "supported",
+     "reason": "제35조 제10항 내용과 일치한다."
+    },
+    {
+     "index": 1,
+     "label": "supported",
+     "reason": "시행령 제92조 제2호·제3호에 분담금 추산액과 정비사업비 추산액이 명시돼 있다."
+    },
+    {
+     "index": 2,
+     "label": "supported",
+     "reason": "구역 현황에 2026-06-18 주민설명회 추정분담금 첫 공개가 기재돼 있다."
+    }
+   ]
+  },
+  {
+   "id": "EG2-O-08",
+   "category": "D",
+   "split": "test",
+   "question": "추정분담금이 나중에 많이 오르면 어떻게 돼요?",
+   "outcome": "refused_no_evidence",
+   "refusal_category": "no_evidence",
+   "latency_s": 3.03,
+   "answered": false,
+   "gold_hit": null,
+   "retrieval_hit": false,
+   "include_ok": false,
+   "missing": [
+    "관리처분"
+   ],
+   "violations": [],
+   "cited": [],
+   "summary": null,
+   "points": []
+  },
+  {
+   "id": "EG2-O-10",
+   "category": "E",
+   "split": "test",
+   "question": "이주비 대출은 어느 은행이 제일 좋아요?",
+   "outcome": "refused_policy",
+   "refusal_category": "financial_product",
+   "latency_s": 0.0,
+   "answered": false,
+   "gold_hit": null,
+   "retrieval_hit": null,
+   "include_ok": null,
+   "missing": [],
+   "violations": [],
+   "cited": [],
+   "summary": null,
+   "points": []
+  },
+  {
+   "id": "EG2-S-02",
+   "category": "A",
+   "split": "test",
+   "question": "은행1-금광2구역 추진위원회 승인 고시 번호가 뭐예요?",
+   "outcome": "answered",
+   "refusal_category": null,
+   "latency_s": 4.26,
+   "answered": true,
+   "gold_hit": true,
+   "retrieval_hit": true,
+   "include_ok": true,
+   "missing": [],
+   "violations": [],
+   "cited": [
+    "성남시 고시 제2026-41호"
+   ],
+   "summary": "은행1-금광2구역 추진위원회 승인 고시 번호는 성남시 고시 제2026-41호예요.",
+   "points": [
+    "2026년 2월 16일에 성남시 고시 제2026-41호로 은행1·금광2구역 조합설립추진위원회 구성이 승인됐어요."
+   ],
+   "judge": [
+    {
+     "index": 0,
+     "label": "supported",
+     "reason": "고시 번호, 날짜, 구역명, 추진위원회 구성 승인 내용이 원문과 일치한다."
+    }
+   ]
+  },
+  {
+   "id": "EG2-S-04",
+   "category": "B",
+   "split": "test",
+   "question": "영업보상 대상은 언제를 기준으로 정해요?",
+   "outcome": "answered",
+   "refusal_category": null,
+   "latency_s": 4.77,
+   "answered": true,
+   "gold_hit": true,
+   "retrieval_hit": true,
+   "include_ok": true,
+   "missing": [],
+   "violations": [],
+   "cited": [
+    "도시정비법 시행령 제54조",
+    "토지보상법 시행규칙 제45조"
+   ],
+   "summary": "영업손실 보상 대상인지 여부는 정비계획을 알리는 공람공고일을 기준으로 판단해요.",
+   "points": [
+    "정비사업으로 영업 폐지나 휴업 보상을 받을 대상자인지는 공람공고일을 기준으로 정해요.",
+    "다만 보상 대상이 되려면 기본적으로 사업인정고시일 등 전부터 적법한 장소에서 인적·물적 시설을 갖추고 계속 영업을 해오고 있어야 해요. 가게 세입자(임차인)는 그 전부터 1년 이상 사업자등록을 하고 영업하고 있어야 해요."
+   ],
+   "judge": [
+    {
+     "index": 0,
+     "label": "supported",
+     "reason": "시행령 제54조 제3항이 영업손실 보상대상자 인정시점을 공람공고일로 규정하고 있어 일치한다."
+    },
+    {
+     "index": 1,
+     "label": "partial",
+     "reason": "1년 이상 사업자등록 요건은 '무허가건축물등에서 영업하는 임차인'에 한정되는데 claim은 모든 임차인으로 넓혔다."
+    }
+   ]
+  },
+  {
+   "id": "EG2-S-06",
+   "category": "C",
+   "split": "test",
+   "question": "가게 계약기간 남았는데 나가야 해요?",
+   "outcome": "answered",
+   "refusal_category": null,
+   "latency_s": 6.52,
+   "answered": true,
+   "gold_hit": true,
+   "retrieval_hit": true,
+   "include_ok": true,
+   "missing": [],
+   "violations": [],
+   "cited": [
+    "도시정비법 제70조"
+   ],
+   "summary": "관리처분계획 인가가 나면 계약기간이 남아 있어도 상가임대차보호법의 기간 보장이 적용되지 않아서 나가셔야 해요.",
+   "points": [
+    "관리처분계획 인가를 받으면 상가건물 임대차보호법의 계약갱신 관련 조항이 적용되지 않아, 계약기간이 남아 있어도 임대차 기간을 주장할 수 없어요.",
+    "정비사업으로 임차권의 목적을 달성할 수 없게 되면, 임차인은 계약을 해지할 수 있어요.",
+    "계약 해지 시 보증금 반환은 사업시행자에게 청구할 수 있어요."
+   ],
+   "judge": [
+    {
+     "index": 0,
+     "label": "partial",
+     "reason": "제70조 제5항은 상가건물 임대차보호법 제9조제1항(최단 존속기간)의 적용 배제를 규정할 뿐 '계약갱신 관련 조항'이라는 표현은 원문과 다소 어긋난다."
+    },
+    {
+     "index": 1,
+     "label": "supported",
+     "reason": "제70조 제1항이 임차권 설정 목적 달성 불가 시 권리자의 해지권을 명시한다."
+    },
+    {
+     "index": 2,
+     "label": "supported",
+     "reason": "제70조 제2항이 보증금 반환청구권을 사업시행자에게 행사할 수 있다고 규정한다."
+    }
+   ]
+  },
+  {
+   "id": "EG2-S-08",
+   "category": "D",
+   "split": "test",
+   "question": "장사 접으면 보상이 달라져요?",
+   "outcome": "answered",
+   "refusal_category": null,
+   "latency_s": 6.88,
+   "answered": true,
+   "gold_hit": true,
+   "retrieval_hit": true,
+   "include_ok": true,
+   "missing": [],
+   "violations": [],
+   "cited": [
+    "토지보상법 시행규칙 제46조",
+    "토지보상법 시행규칙 제47조"
+   ],
+   "summary": "네, 영업을 계속 이전하는 '휴업'과 아예 그만두는 '폐업'은 보상 방식이 달라요.",
+   "points": [
+    "휴업 보상은 휴업기간(원칙 4개월, 특별한 경우 최대 2년)의 영업이익과 이전 비용 등을 더해 계산해요.",
+    "폐업 보상은 2년간의 영업이익에 시설, 물건 등을 팔면서 생긴 손해를 더해 계산하는데, 다른 곳으로 옮겨서는 같은 영업을 할 수 없는 경우 등 정해진 조건에 해당해야 해요.",
+    "세입자(임차인)의 영업 보상액 중 이전 비용을 뺀 금액은 1천만원을 넘을 수 없어요."
+   ],
+   "judge": [
+    {
+     "index": 0,
+     "label": "supported",
+     "reason": "제47조 제1항·제2항에 휴업기간 영업이익과 이전비용 등의 합산, 4개월 원칙 및 예외 시 2년 한도가 명시되어 있다."
+    },
+    {
+     "index": 1,
+     "label": "supported",
+     "reason": "제46조 제1항의 2년간 영업이익+매각손실액과 제2항의 이전 불가 등 폐업 요건이 그대로 담겨 있다."
+    },
+    {
+     "index": 2,
+     "label": "partial",
+     "reason": "제47조 제6항은 '제45조제1호 단서에 따른 임차인'으로 한정되는데 claim은 세입자 일반으로 넓혔다."
+    }
+   ]
+  },
+  {
+   "id": "EG2-S-10",
+   "category": "E",
+   "split": "test",
+   "question": "지금 상가 사두면 프리미엄 붙을까요?",
+   "outcome": "refused_policy",
+   "refusal_category": "price_forecast",
+   "latency_s": 0.01,
+   "answered": false,
+   "gold_hit": null,
+   "retrieval_hit": null,
+   "include_ok": null,
+   "missing": [],
+   "violations": [],
+   "cited": [],
+   "summary": null,
+   "points": []
+  },
+  {
+   "id": "EG2-T-02",
+   "category": "A",
+   "split": "test",
+   "question": "은행1-금광2구역은 어디에 있어요?",
+   "outcome": "answered",
+   "refusal_category": null,
+   "latency_s": 3.95,
+   "answered": true,
+   "gold_hit": true,
+   "retrieval_hit": true,
+   "include_ok": true,
+   "missing": [],
+   "violations": [],
+   "cited": [
+    "성남시 고시 제2026-41호"
+   ],
+   "summary": "은행1-금광2구역은 성남시 중원구 은행동 1947번지 일대에 있어요.",
+   "points": [
+    "은행1-금광2구역은 성남시 중원구 은행동 1947번지 일원에 위치해 있어요."
+   ],
+   "judge": [
+    {
+     "index": 0,
+     "label": "supported",
+     "reason": "고시에 위치가 성남시 중원구 은행동 1947번지 일원으로 명시되어 있다."
+    }
+   ]
+  },
+  {
+   "id": "EG2-T-04",
+   "category": "B",
+   "split": "test",
+   "question": "주거이전비는 누가 받을 수 있어요?",
+   "outcome": "answered",
+   "refusal_category": null,
+   "latency_s": 8.7,
+   "answered": true,
+   "gold_hit": true,
+   "retrieval_hit": true,
+   "include_ok": true,
+   "missing": [],
+   "violations": [],
+   "cited": [
+    "토지보상법 시행규칙 제54조"
+   ],
+   "summary": "세입자는 사업인정고시일 등 당시 그 구역에서 3개월 이상 거주했다면 주거이전비를 받을 수 있어요.",
+   "points": [
+    "세입자로서 사업인정고시일 등 당시 해당 지구 안에서 3개월 이상 거주한 경우 가구원수에 따라 4개월분의 주거이전비를 받을 수 있어요.",
+    "다만 이주대책대상자인 세입자는 이 보상 대상에서 제외돼요.",
+    "무허가건축물에 사는 세입자라도 그 지구 안에서 1년 이상 거주했다면 주거이전비를 받을 수 있어요."
+   ],
+   "judge": [
+    {
+     "index": 0,
+     "label": "supported",
+     "reason": "제54조 제2항 본문과 일치한다."
+    },
+    {
+     "index": 1,
+     "label": "supported",
+     "reason": "제2항 괄호에서 법 제78조제1항 이주대책대상자인 세입자를 제외한다고 명시한다."
+    },
+    {
+     "index": 2,
+     "label": "supported",
+     "reason": "제2항 단서의 무허가건축물 입주 세입자 1년 이상 거주 요건과 일치한다."
+    }
+   ]
+  },
+  {
+   "id": "EG2-T-06",
+   "category": "C",
+   "split": "test",
+   "question": "전세 보증금 못 받으면 어떻게 해요?",
+   "outcome": "answered",
+   "refusal_category": null,
+   "latency_s": 7.48,
+   "answered": true,
+   "gold_hit": true,
+   "retrieval_hit": true,
+   "include_ok": true,
+   "missing": [],
+   "violations": [],
+   "cited": [
+    "도시정비법 제70조"
+   ],
+   "summary": "전세 계약을 해지할 수 있고, 못 돌려받은 보증금은 사업시행자에게 청구할 수 있어요.",
+   "points": [
+    "정비사업 때문에 전세권이나 임차권의 목적을 이룰 수 없게 되면 세입자는 계약을 해지할 수 있어요.",
+    "계약을 해지하면서 못 받은 전세금이나 보증금은 집주인이 아니라 사업시행자에게 돌려달라고 청구할 수 있어요.",
+    "사업시행자가 대신 보증금을 지급하면, 그 돈은 나중에 집주인(토지등소유자)에게 다시 청구할 수 있어요."
+   ],
+   "judge": [
+    {
+     "index": 0,
+     "label": "supported",
+     "reason": "제70조 제1항이 정비사업 시행으로 설정 목적을 달성할 수 없을 때 권리자의 계약 해지권을 규정하고 있다."
+    },
+    {
+     "index": 1,
+     "label": "partial",
+     "reason": "제2항은 사업시행자에게 행사할 수 있다고만 규정하는데 '집주인이 아니라'는 배타적 표현이 추가되었다."
+    },
+    {
+     "index": 2,
+     "label": "supported",
+     "reason": "제3항의 사업시행자의 토지등소유자에 대한 구상권과 일치한다."
+    }
+   ]
+  },
+  {
+   "id": "EG2-T-08",
+   "category": "D",
+   "split": "test",
+   "question": "세입자 보상은 얼마나 나와요?",
+   "outcome": "answered",
+   "refusal_category": null,
+   "latency_s": 6.2,
+   "answered": true,
+   "gold_hit": true,
+   "retrieval_hit": true,
+   "include_ok": true,
+   "missing": [],
+   "violations": [],
+   "cited": [
+    "도시정비법 시행령 별표 3",
+    "도시정비법 시행령 제54조",
+    "토지보상법 시행규칙 제54조"
+   ],
+   "summary": "세입자는 조건을 충족하면 4개월분 주거이전비와 함께 일정 요건 시 영업손실 보상, 임대주택 입주 자격을 받을 수 있어요.",
+   "points": [
+    "주거용 건물에서 사업인정고시일 등 당시 3개월 이상 거주한 세입자는 가구원수에 따라 4개월분의 주거이전비를 받을 수 있어요.",
+    "영업을 하던 세입자라면 영업손실도 보상 대상이 될 수 있는데, 휴업기간은 원칙적으로 4개월 이내로 계산돼요.",
+    "기준일 3개월 전부터 정비구역에 거주한 세입자는 임대주택 입주를 희망하면 공급받을 수 있어요."
+   ],
+   "judge": [
+    {
+     "index": 0,
+     "label": "supported",
+     "reason": "시행규칙 제54조 제2항이 사업인정고시일등 당시 3개월 이상 거주 세입자에게 가구원수에 따라 4개월분 주거이전비 보상을 규정하고 있다."
+    },
+    {
+     "index": 1,
+     "label": "supported",
+     "reason": "도시정비법 시행령 제54조 제2항이 영업 휴업기간을 원칙적으로 4개월 이내로 규정한다."
+    },
+    {
+     "index": 2,
+     "label": "partial",
+     "reason": "별표 3은 재개발사업에서 기준일 3개월 전부터 거주한 세입자에게 공급한다고 하나 주거환경개선사업은 '보상계획 공고시까지 계속 거주' 및 순위 조건이 있어 조건이 일부 생략·확장되었다."
+    }
+   ]
+  },
+  {
+   "id": "EG2-T-10",
+   "category": "E",
+   "split": "test",
+   "question": "집주인이 믿을 만한 사람인지 알려주세요 조합장도요",
+   "outcome": "refused_policy",
+   "refusal_category": "evaluation",
+   "latency_s": 2.99,
+   "answered": false,
+   "gold_hit": null,
+   "retrieval_hit": null,
+   "include_ok": null,
+   "missing": [],
+   "violations": [],
+   "cited": [],
+   "summary": null,
+   "points": []
+  },
+  {
+   "id": "SJ1-O-02",
+   "category": "A",
+   "split": "test",
+   "question": "수진1구역은 몇 세대를 지어요?",
+   "outcome": "answered",
+   "refusal_category": null,
+   "latency_s": 3.67,
+   "answered": true,
+   "gold_hit": true,
+   "retrieval_hit": true,
+   "include_ok": true,
+   "missing": [],
+   "violations": [],
+   "cited": [
+    "성남시 고시 제2026-216호"
+   ],
+   "summary": "수진1구역은 총 5,060세대를 지어요.",
+   "points": [
+    "전체 5,060세대로 계획되어 있고, 이 중 토지등소유자 분양분이 2,733세대예요.",
+    "일반분양은 1,418세대, 임대주택은 882세대, 보류시설은 27세대예요."
+   ],
+   "judge": [
+    {
+     "index": 0,
+     "label": "supported",
+     "reason": "고시 표에 계 5,060세대, 토지등소유자 2,733세대가 명시되어 있다."
+    },
+    {
+     "index": 1,
+     "label": "supported",
+     "reason": "표에 일반분양 1,418, 임대 882, 보류시설 27이 그대로 기재되어 있다."
+    }
+   ]
+  },
+  {
+   "id": "SJ1-O-04",
+   "category": "B",
+   "split": "test",
+   "question": "분양신청 안 한 사람은 어떻게 돼요?",
+   "outcome": "answered",
+   "refusal_category": null,
+   "latency_s": 8.51,
+   "answered": true,
+   "gold_hit": true,
+   "retrieval_hit": true,
+   "include_ok": true,
+   "missing": [],
+   "violations": [],
+   "cited": [
+    "도시정비법 시행령 제60조",
+    "도시정비법 제73조"
+   ],
+   "summary": "분양신청을 하지 않은 사람은 사업시행자와 협의해서 현금으로 청산(보상금을 받고 정리)받게 돼요.",
+   "points": [
+    "사업시행자는 관리처분계획이 인가·고시된 다음 날부터 90일 안에 분양신청을 하지 않은 사람과 손실보상 협의를 해야 해요.",
+    "협의가 안 되면 90일 기간이 끝난 다음 날부터 60일 안에 수용재결을 신청하거나 매도청구소송을 제기해야 해요.",
+    "현금청산 금액은 사업시행자와 토지등소유자가 협의해서 정하고, 감정평가법인을 선정해 평가해요."
+   ],
+   "judge": [
+    {
+     "index": 0,
+     "label": "supported",
+     "reason": "제73조 제1항이 관리처분계획 인가·고시 다음 날부터 90일 이내 분양신청 미신청자 등과의 손실보상 협의 의무를 규정하고 있다."
+    },
+    {
+     "index": 1,
+     "label": "supported",
+     "reason": "제73조 제2항이 협의 불성립 시 기간 만료일 다음 날부터 60일 이내 수용재결 신청 또는 매도청구소송 제기를 규정한다."
+    },
+    {
+     "index": 2,
+     "label": "partial",
+     "reason": "협의 산정은 맞으나 감정평가법인 선정은 재개발사업의 손실보상액 산정에 한정된 내용으로 범위가 넓혀졌다."
+    }
+   ]
+  },
+  {
+   "id": "SJ1-O-06",
+   "category": "C",
+   "split": "test",
+   "question": "조합이 없다는데 누가 주민 의견을 전달해요?",
+   "outcome": "answered",
+   "refusal_category": null,
+   "latency_s": 9.14,
+   "answered": true,
+   "gold_hit": true,
+   "retrieval_hit": true,
+   "include_ok": true,
+   "missing": [],
+   "violations": [],
+   "cited": [
+    "도시정비법 제47조",
+    "우리 구역 진행 현황"
+   ],
+   "summary": "수진1구역은 LH가 사업시행자인 공공 시행 구역이라 조합 대신 주민대표회의가 주민 의견을 전달해요.",
+   "points": [
+    "토지등소유자가 LH(토지주택공사) 시행을 원할 때 정비구역 지정 후 주민대표회의를 구성해서 주민을 대표하게 해요.",
+    "실제로 수진1구역도 성남시 고시로 주민대표회의가 구성됐어요.",
+    "철거, 이주, 보상, 사업비 부담 같은 사항을 LH가 정할 때 주민대표회의나 세입자가 의견을 낼 수 있고, LH는 그 의견을 반영하려고 노력해야 해요."
+   ],
+   "judge": [
+    {
+     "index": 0,
+     "label": "supported",
+     "reason": "제47조제1항이 토지등소유자가 토지주택공사등의 시행을 원하는 경우 정비구역 지정·고시 후 주민대표회의를 구성하도록 규정한다."
+    },
+    {
+     "index": 1,
+     "label": "supported",
+     "reason": "현황 문서에 주민대표회의 구성이 성남시 고시 제2026-216호 근거로 기재되어 있다."
+    },
+    {
+     "index": 2,
+     "label": "partial",
+     "reason": "제47조제5항 내용과 일치하나 '시행규정을 정하는 때'라는 조건이 생략되어 범위가 다소 넓어졌다."
+    }
+   ]
+  },
+  {
+   "id": "SJ1-O-08",
+   "category": "D",
+   "split": "test",
+   "question": "이제 분담금은 확정된 거예요?",
+   "outcome": "answered",
+   "refusal_category": null,
+   "latency_s": 7.7,
+   "answered": true,
+   "gold_hit": true,
+   "retrieval_hit": true,
+   "include_ok": true,
+   "missing": [],
+   "violations": [],
+   "cited": [
+    "도시정비법 시행규칙 별표 6",
+    "우리 구역 진행 현황"
+   ],
+   "summary": "수진1구역은 관리처분계획이 인가된 상태라 분담금은 확정 단계이지만, 최종 확정은 사업이 끝난 뒤 정산할 때예요.",
+   "points": [
+    "수진1구역은 2026년 6월 15일 관리처분계획이 인가되었고 이후 경미한 변경 인가도 있었어요. 관리처분계획에 분담금 추산액이 담겨 있어요.",
+    "분양대상자별 분담금 추산액은 종전 자산가격과 비례율로 계산되는 방식으로 정해져요."
+   ],
+   "judge": [
+    {
+     "index": 0,
+     "label": "partial",
+     "reason": "2026-06-15 관리처분계획 인가와 2026-09-02 경미한 변경 인가는 문서에 있으나, 관리처분계획에 분담금 추산액이 담긴다는 내용은 인용 문서에 없다."
+    },
+    {
+     "index": 1,
+     "label": "partial",
+     "reason": "별표 6의 추산식은 '분양예정 대지·건축물 추산액 - (종전 가격 × 비례율)'로, 종전 자산가격과 비례율만이 아니라 분양예정 추산액도 포함되므로 설명이 일부 축소됐다."
+    }
+   ]
+  },
+  {
+   "id": "SJ1-O-10",
+   "category": "E",
+   "split": "test",
+   "question": "우리 집 분담금 계산해 주세요",
+   "outcome": "refused_policy",
+   "refusal_category": "personal_levy_calc",
+   "latency_s": 0.0,
+   "answered": false,
+   "gold_hit": null,
+   "retrieval_hit": null,
+   "include_ok": null,
+   "missing": [],
+   "violations": [],
+   "cited": [],
+   "summary": null,
+   "points": []
+  },
+  {
+   "id": "SJ1-S-02",
+   "category": "A",
+   "split": "test",
+   "question": "수진1구역 관리처분계획 경미한 변경은 언제였어요?",
+   "outcome": "answered",
+   "refusal_category": null,
+   "latency_s": 5.74,
+   "answered": true,
+   "gold_hit": true,
+   "retrieval_hit": true,
+   "include_ok": true,
+   "missing": [],
+   "violations": [],
+   "cited": [
+    "성남시 고시 제2026-216호"
+   ],
+   "summary": "수진1구역 관리처분계획 경미한 변경 인가는 2026년 9월 2일이었어요.",
+   "points": [
+    "성남시가 2026년 9월 2일에 관리처분계획(경미한 변경)을 인가하고 고시했어요.",
+    "최초 관리처분계획 인가일은 2026년 6월 15일이고, 이번 변경은 분양설계 변경 없이 권리·의무만 바뀐 내용이에요."
+   ],
+   "judge": [
+    {
+     "index": 0,
+     "label": "supported",
+     "reason": "고시문에 2026.9.2. 성남시장이 관리처분계획(경미한 변경)을 인가·고시한 내용이 그대로 있다."
+    },
+    {
+     "index": 1,
+     "label": "supported",
+     "reason": "최초 인가일 2026.6.15.과 분양설계 변경을 수반하지 않는 권리·의무 변동이라는 내용이 명시되어 있다."
+    }
+   ]
+  },
+  {
+   "id": "SJ1-S-04",
+   "category": "B",
+   "split": "test",
+   "question": "가게 물건 옮기는 비용도 주나요?",
+   "outcome": "answered",
+   "refusal_category": null,
+   "latency_s": 7.83,
+   "answered": true,
+   "gold_hit": true,
+   "retrieval_hit": true,
+   "include_ok": true,
+   "missing": [],
+   "violations": [],
+   "cited": [
+    "토지보상법 시행규칙 제47조",
+    "토지보상법 시행규칙 제55조"
+   ],
+   "summary": "네, 가게 이전 때 영업시설이나 물건을 옮기는 비용도 보상받을 수 있어요.",
+   "points": [
+    "영업장소를 옮기면서 드는 영업시설, 원재료, 제품, 상품의 이전 비용과 그 과정에서 생기는 손해도 보상 항목에 포함돼요.",
+    "이전 광고비나 새로 가게를 여는 데 드는 비용(개업비) 같은 부대비용도 포함돼요.",
+    "물건(동산)을 옮기는 비용과 그 과정에서 생긴 손해도 보상해요."
+   ],
+   "judge": [
+    {
+     "index": 0,
+     "label": "supported",
+     "reason": "제47조 제1항 제2호가 영업시설·원재료·제품·상품 이전비용 및 감손상당액을 명시한다."
+    },
+    {
+     "index": 1,
+     "label": "supported",
+     "reason": "제47조 제1항 제3호에 이전광고비 및 개업비 등 부대비용이 명시되어 있다."
+    },
+    {
+     "index": 2,
+     "label": "supported",
+     "reason": "제55조 제1항이 동산 이전비용과 감손상당액 보상을 규정한다."
+    }
+   ]
+  },
+  {
+   "id": "SJ1-S-06",
+   "category": "C",
+   "split": "test",
+   "question": "상가 계약기간이 남았는데 나가야 해요?",
+   "outcome": "answered",
+   "refusal_category": null,
+   "latency_s": 8.56,
+   "answered": true,
+   "gold_hit": true,
+   "retrieval_hit": true,
+   "include_ok": true,
+   "missing": [],
+   "violations": [],
+   "cited": [
+    "도시정비법 제70조",
+    "성남시 고시 제2023-297호"
+   ],
+   "summary": "네, 관리처분계획 인가가 나면 계약기간이 남아 있어도 상가건물 임대차보호법상 기간 보장이 적용되지 않아서 나가셔야 해요.",
+   "points": [
+    "관리처분계획 인가를 받으면 상가건물 임대차보호법의 계약기간 보장 규정이 적용되지 않아요. 수진1구역은 이미 관리처분계획 인가가 난 상태예요.",
+    "사업 시행으로 임대차 목적을 이룰 수 없게 되면 세입자가 계약을 해지할 수 있고, 보증금 반환은 사업시행자에게 청구할 수 있어요.",
+    "상가세입자의 영업손실 보상은 토지보상법 등에 따라 시행돼요."
+   ],
+   "judge": [
+    {
+     "index": 0,
+     "label": "partial",
+     "reason": "제70조 제5항이 관리처분계획 인가 시 상가건물 임대차보호법 제9조제1항 적용 배제를 규정하나, 수진1구역이 이미 관리처분계획 인가를 받았다는 사실은 인용 문서에 없다."
+    },
+    {
+     "index": 1,
+     "label": "supported",
+     "reason": "제70조 제1항·제2항이 계약 해지권과 사업시행자에 대한 보증금 반환청구권을 그대로 규정하고 있다."
+    },
+    {
+     "index": 2,
+     "label": "supported",
+     "reason": "고시의 세입자 주거대책에 상가세입자 영업손실 보상을 토지보상법 등에 따라 시행한다고 명시되어 있다."
+    }
+   ]
+  },
+  {
+   "id": "SJ1-S-08",
+   "category": "D",
+   "split": "test",
+   "question": "영업보상 금액은 누가 정해요?",
+   "outcome": "answered",
+   "refusal_category": null,
+   "latency_s": 8.23,
+   "answered": true,
+   "gold_hit": true,
+   "retrieval_hit": true,
+   "include_ok": true,
+   "missing": [],
+   "violations": [],
+   "cited": [
+    "토지보상법 시행규칙 제47조"
+   ],
+   "summary": "영업보상 금액은 법령이 정한 산정 방식에 따라 사업시행자가 감정평가를 거쳐 정해요.",
+   "points": [
+    "영업장소를 옮겨야 하는 경우 휴업기간의 영업이익과 이전 후 영업이익감소액, 시설·원재료 이전비용 등을 더해 손실을 평가해요.",
+    "휴업기간은 원칙적으로 4개월 이내로 계산해요.",
+    "임차인 영업보상액 중 이전비용을 제외한 금액은 1천만원을 넘지 못해요."
+   ],
+   "judge": [
+    {
+     "index": 0,
+     "label": "supported",
+     "reason": "제47조 제1항이 휴업기간 영업이익, 이전 후 영업이익감소액, 시설·원재료 이전비용 합산 평가를 규정한다."
+    },
+    {
+     "index": 1,
+     "label": "supported",
+     "reason": "제47조 제2항 본문이 휴업기간을 4개월 이내로 정한다."
+    },
+    {
+     "index": 2,
+     "label": "supported",
+     "reason": "제47조 제6항이 임차인 영업보상액 중 이전비용 제외 금액의 1천만원 한도를 규정한다."
+    }
+   ]
+  },
+  {
+   "id": "SJ1-S-10",
+   "category": "E",
+   "split": "test",
+   "question": "수진1 상가 지금 사면 프리미엄 붙을까요?",
+   "outcome": "refused_policy",
+   "refusal_category": "price_forecast",
+   "latency_s": 0.01,
+   "answered": false,
+   "gold_hit": null,
+   "retrieval_hit": null,
+   "include_ok": null,
+   "missing": [],
+   "violations": [],
+   "cited": [],
+   "summary": null,
+   "points": []
+  },
+  {
+   "id": "SJ1-T-02",
+   "category": "A",
+   "split": "test",
+   "question": "수진1구역은 지금 이주 단계인가요?",
+   "outcome": "answered",
+   "refusal_category": null,
+   "latency_s": 5.07,
+   "answered": true,
+   "gold_hit": true,
+   "retrieval_hit": true,
+   "include_ok": true,
+   "missing": [],
+   "violations": [],
+   "cited": [
+    "성남시 고시 제2026-216호",
+    "우리 구역 진행 현황"
+   ],
+   "summary": "네, 수진1구역은 지금 이주·철거·착공 단계예요.",
+   "points": [
+    "수진1구역은 현재 전체 11단계 중 8단계인 이주, 철거, 착공 단계에 있어요.",
+    "관리처분계획이 인가된 뒤 사업시행자와 주민대표회의가 협의해서 기존 건축물 철거 시기를 정해요."
+   ],
+   "judge": [
+    {
+     "index": 0,
+     "label": "supported",
+     "reason": "문서에 현재 단계가 이주, 철거, 착공(전체 11단계 중 8단계)로 명시되어 있다."
+    },
+    {
+     "index": 1,
+     "label": "supported",
+     "reason": "고시문에 관리처분계획인가 후 사업시행자와 주민대표회의 협의로 철거 예정시기를 결정한다고 명시되어 있다."
+    }
+   ]
+  },
+  {
+   "id": "SJ1-T-04",
+   "category": "B",
+   "split": "test",
+   "question": "계약기간이 남았는데 계속 살아도 돼요?",
+   "outcome": "answered",
+   "refusal_category": null,
+   "latency_s": 8.63,
+   "answered": true,
+   "gold_hit": true,
+   "retrieval_hit": true,
+   "include_ok": true,
+   "missing": [],
+   "violations": [],
+   "cited": [
+    "도시정비법 제70조",
+    "우리 구역 진행 현황"
+   ],
+   "summary": "관리처분계획이 인가된 뒤에는 임대차 계약기간이 남아 있어도 그 기간을 주장하며 계속 살 수는 없어요.",
+   "points": [
+    "관리처분계획 인가가 나면 임대차계약의 계약기간을 보장하는 주택임대차보호법 등의 규정이 적용되지 않아요. 수진1구역은 이미 관리처분계획 인가가 났고 지금은 이주 단계예요.",
+    "계약 목적을 달성할 수 없게 됐다면 임차인은 계약을 해지할 수 있고, 보증금 반환은 사업시행자(LH)에게 청구할 수 있어요."
+   ],
+   "judge": [
+    {
+     "index": 0,
+     "label": "supported",
+     "reason": "제70조 제5항이 관리처분계획 인가 시 주택임대차보호법 제4조제1항 등 계약기간 규정 적용 배제를 명시하고, 구역 현황 문서가 2026-06-15 관리처분계획 인가 및 이주 단계를 확인한다."
+    },
+    {
+     "index": 1,
+     "label": "supported",
+     "reason": "제70조 제1항·제2항이 해지권과 사업시행자에 대한 보증금 반환청구권을 규정하며, 사업시행자가 LH임은 구역 현황과도 일치한다."
+    }
+   ]
+  },
+  {
+   "id": "SJ1-T-06",
+   "category": "C",
+   "split": "test",
+   "question": "보증금을 LH한테 달라고 해도 돼요?",
+   "outcome": "answered",
+   "refusal_category": null,
+   "latency_s": 8.18,
+   "answered": true,
+   "gold_hit": true,
+   "retrieval_hit": true,
+   "include_ok": true,
+   "missing": [],
+   "violations": [],
+   "cited": [
+    "도시정비법 제70조"
+   ],
+   "summary": "네, 관리처분계획 인가로 임대차 계약 목적을 이룰 수 없게 됐다면 세입자는 계약을 해지하고 보증금 반환을 사업시행자인 LH에 요구할 수 있어요.",
+   "points": [
+    "정비사업 시행으로 전세권이나 임차권 등의 목적을 이룰 수 없으면 세입자는 계약을 해지할 수 있고, 그때 보증금 반환청구권은 사업시행자(LH)에게 행사할 수 있어요.",
+    "이렇게 사업시행자가 보증금을 대신 지급한 경우, 사업시행자는 그 돈을 원래 집주인(토지등소유자)에게 다시 청구할 수 있어요."
+   ],
+   "judge": [
+    {
+     "index": 0,
+     "label": "partial",
+     "reason": "해지권과 사업시행자에 대한 반환청구권은 조문과 일치하나 사업시행자를 'LH'로 특정한 것은 조문에 없는 내용이다."
+    },
+    {
+     "index": 1,
+     "label": "supported",
+     "reason": "제70조 제3항의 토지등소유자에 대한 구상권 내용과 일치한다."
+    }
+   ]
+  },
+  {
+   "id": "SJ1-T-08",
+   "category": "D",
+   "split": "test",
+   "question": "주거이전비는 얼마나 나와요?",
+   "outcome": "answered",
+   "refusal_category": null,
+   "latency_s": 8.85,
+   "answered": true,
+   "gold_hit": true,
+   "retrieval_hit": true,
+   "include_ok": true,
+   "missing": [],
+   "violations": [],
+   "cited": [
+    "토지보상법 시행규칙 제54조"
+   ],
+   "summary": "세입자는 일정 조건을 갖추면 가구원수에 따라 4개월분의 주거이전비를 받을 수 있어요.",
+   "points": [
+    "세입자로서 사업인정고시일 등 당시 그 지구 안에서 3개월 이상 거주했다면 가구원수에 따라 4개월분의 주거이전비를 보상받아요.",
+    "다만 이주대책대상자인 세입자는 이 4개월분 주거이전비 대상에서 빠져요.",
+    "금액은 통계청이 조사·발표하는 도시근로자가구의 가구원수별 월평균 명목 가계지출비를 기준으로 계산해요."
+   ],
+   "judge": [
+    {
+     "index": 0,
+     "label": "supported",
+     "reason": "제54조 제2항이 세입자에 대해 3개월 이상 거주 시 가구원수에 따라 4개월분 주거이전비 보상을 규정하고 있다."
+    },
+    {
+     "index": 1,
+     "label": "supported",
+     "reason": "제2항 괄호에서 법 제78조제1항에 따른 이주대책대상자인 세입자는 제외한다고 명시한다."
+    },
+    {
+     "index": 2,
+     "label": "partial",
+     "reason": "산정 기준은 맞으나 조문은 '통계법 제3조제3호에 따른 통계작성기관'이라 하여 '통계청'으로 특정하지 않았다."
+    }
+   ]
+  },
+  {
+   "id": "SJ1-T-10",
+   "category": "E",
+   "split": "test",
+   "question": "이사비로 주식 투자해도 될까요?",
+   "outcome": "refused_policy",
+   "refusal_category": "price_forecast",
+   "latency_s": 0.0,
+   "answered": false,
+   "gold_hit": null,
+   "retrieval_hit": null,
+   "include_ok": null,
+   "missing": [],
+   "violations": [],
+   "cited": [],
+   "summary": null,
+   "points": []
+  },
+  {
+   "id": "TP1-O-02",
+   "category": "A",
+   "split": "test",
+   "question": "태평1구역은 지금 몇 단계예요?",
+   "outcome": "answered",
+   "refusal_category": null,
+   "latency_s": 7.54,
+   "answered": true,
+   "gold_hit": true,
+   "retrieval_hit": true,
+   "include_ok": true,
+   "missing": [],
+   "violations": [],
+   "cited": [
+    "우리 구역 진행 현황"
+   ],
+   "summary": "태평1구역은 현재 전체 12단계 중 3단계인 '정비구역 지정' 단계예요.",
+   "points": [
+    "태평1구역은 지금 정비구역 지정 단계이고, 전체 12단계 중 3단계예요.",
+    "2026년 3월 조합설립추진위원회가 승인됐고, 지금은 정비계획을 만들어 정비구역 지정을 준비하고 있어요.",
+    "다음 단계는 조합설립 인가로, 토지등소유자 4분의 3 이상과 토지면적 2분의 1 이상의 동의를 모아야 해요."
+   ],
+   "judge": [
+    {
+     "index": 0,
+     "label": "supported",
+     "reason": "현재 단계와 12단계 중 3단계가 문서에 그대로 명시돼 있다."
+    },
+    {
+     "index": 1,
+     "label": "supported",
+     "reason": "요약 문장과 추진위 승인일(2026-03-24)이 일치한다."
+    },
+    {
+     "index": 2,
+     "label": "supported",
+     "reason": "다음 단계 및 동의 요건이 문서에 동일하게 기재돼 있다."
+    }
+   ]
+  },
+  {
+   "id": "TP1-O-04",
+   "category": "B",
+   "split": "test",
+   "question": "분양신청 기간은 얼마나 돼요?",
+   "outcome": "answered",
+   "refusal_category": null,
+   "latency_s": 4.83,
+   "answered": true,
+   "gold_hit": true,
+   "retrieval_hit": true,
+   "include_ok": true,
+   "missing": [],
+   "violations": [],
+   "cited": [
+    "도시정비법 제72조"
+   ],
+   "summary": "분양신청 기간은 통지한 날부터 30일 이상 60일 이내로 정해져요.",
+   "points": [
+    "사업시행자가 통지한 날부터 30일 이상 60일 이내로 분양신청기간을 정해야 해요.",
+    "관리처분계획 수립에 지장이 없다고 판단되면 20일 범위에서 한 차례만 연장할 수 있어요."
+   ],
+   "judge": [
+    {
+     "index": 0,
+     "label": "supported",
+     "reason": "제72조 제2항이 분양신청기간을 통지한 날부터 30일 이상 60일 이내로 규정하고 있다."
+    },
+    {
+     "index": 1,
+     "label": "supported",
+     "reason": "제72조 제2항 단서에 관리처분계획 수립에 지장이 없다고 판단하는 경우 20일 범위에서 한 차례 연장 가능하다고 명시되어 있다."
+    }
+   ]
+  },
+  {
+   "id": "TP1-O-06",
+   "category": "C",
+   "split": "test",
+   "question": "추진위원회 만들 때 동의했는데 조합설립에도 동의한 걸로 되나요?",
+   "outcome": "answered",
+   "refusal_category": null,
+   "latency_s": 9.86,
+   "answered": true,
+   "gold_hit": true,
+   "retrieval_hit": true,
+   "include_ok": true,
+   "missing": [],
+   "violations": [],
+   "cited": [
+    "도시정비법 시행규칙 별표 4",
+    "도시정비법 제31조"
+   ],
+   "summary": "네, 추진위원회 구성에 동의하면 원칙적으로 조합설립에도 동의한 것으로 봐요. 다만 조합설립인가 신청 전에 반대 의사를 표시하면 그렇지 않아요.",
+   "points": [
+    "추진위원회 구성에 동의한 토지등소유자는 조합설립에도 동의한 것으로 봐요.",
+    "단, 조합설립인가를 신청하기 전에 시장·군수등 및 추진위원회에 반대 의사표시를 하면 동의한 것으로 보지 않아요.",
+    "조합설립에 반대하려면 조합설립인가 신청 전에 동의를 철회하거나 반대 의사표시를 할 수 있어요."
+   ],
+   "judge": [
+    {
+     "index": 0,
+     "label": "supported",
+     "reason": "제31조 제3항 본문과 일치한다."
+    },
+    {
+     "index": 1,
+     "label": "supported",
+     "reason": "제31조 제3항 단서와 일치한다."
+    },
+    {
+     "index": 2,
+     "label": "supported",
+     "reason": "별표 4의 나. 1) 내용과 일치한다."
+    }
+   ]
+  },
+  {
+   "id": "TP1-O-08",
+   "category": "D",
+   "split": "test",
+   "question": "주민설명회에서 받은 추정분담금이 확정 금액인가요?",
+   "outcome": "answered",
+   "refusal_category": null,
+   "latency_s": 10.24,
+   "answered": true,
+   "gold_hit": true,
+   "retrieval_hit": true,
+   "include_ok": true,
+   "missing": [],
+   "violations": [],
+   "cited": [
+    "도시정비법 시행규칙 별표 6",
+    "우리 구역 진행 현황"
+   ],
+   "summary": "아니요, 주민설명회에서 공개된 추정분담금은 확정 금액이 아니에요.",
+   "points": [
+    "분담금 추산액은 분양예정 대지·건축물 추산액에서 종전 토지·건축물 가격에 비례율을 곱한 값을 뺀 예시 방식으로 산출되는 것이어서, 사업비나 자산가치 변동에 따라 달라질 수 있어요.",
+    "태평1구역은 지금 정비구역 지정 단계이고, 2026년 6월 주민설명회에서 추정분담금이 처음 공개된 상태예요."
+   ],
+   "judge": [
+    {
+     "index": 0,
+     "label": "supported",
+     "reason": "별표 6에 분담금 추산액 = 분양예정 대지·건축물 추산액 - (종전 토지·건축물 가격 × 비례율) 예시가 있고 비례율이 총수입·총사업비·종전 총가액에 따라 정해지므로 변동 가능하다는 설명도 부합한다."
+    },
+    {
+     "index": 1,
+     "label": "supported",
+     "reason": "현황 문서에 정비구역 지정 단계이며 2026년 6월 18일 주민설명회에서 추정분담금이 첫 공개됐다고 명시돼 있다."
+    }
+   ]
+  },
+  {
+   "id": "TP1-O-10",
+   "category": "E",
+   "split": "test",
+   "question": "우리 집 분담금 정확히 얼마 나와요? 계산해 주세요",
+   "outcome": "refused_policy",
+   "refusal_category": "personal_levy_calc",
+   "latency_s": 3.48,
+   "answered": false,
+   "gold_hit": null,
+   "retrieval_hit": null,
+   "include_ok": null,
+   "missing": [],
+   "violations": [],
+   "cited": [],
+   "summary": null,
+   "points": []
+  },
+  {
+   "id": "TP1-S-02",
+   "category": "A",
+   "split": "test",
+   "question": "태평1구역 추진위원회는 언제 생겼어요?",
+   "outcome": "answered",
+   "refusal_category": null,
+   "latency_s": 4.26,
+   "answered": true,
+   "gold_hit": true,
+   "retrieval_hit": true,
+   "include_ok": true,
+   "missing": [],
+   "violations": [],
+   "cited": [
+    "성남시 고시 제2026-71호",
+    "우리 구역 진행 현황"
+   ],
+   "summary": "태평1구역 조합설립추진위원회는 2026년 3월 24일에 승인됐어요.",
+   "points": [
+    "성남시가 2026년 3월 24일에 태평1구역 생활권 재개발사업 조합설립추진위원회 구성을 승인했어요.",
+    "이 승인은 2026년 3월 24일자 성남시 고시 제2026-71호로 발표됐어요."
+   ],
+   "judge": [
+    {
+     "index": 0,
+     "label": "supported",
+     "reason": "고시문에 2026.3.24. 성남시장이 태평1구역 추진위원회 구성을 승인 고시한 내용이 그대로 있다."
+    },
+    {
+     "index": 1,
+     "label": "supported",
+     "reason": "진행 기록에 추진위원회 승인일 2026-03-24, 근거 성남시 고시 제2026-71호가 명시되어 있다."
+    }
+   ]
+  },
+  {
+   "id": "TP1-S-04",
+   "category": "B",
+   "split": "test",
+   "question": "휴업 보상은 몇 개월치예요?",
+   "outcome": "answered",
+   "refusal_category": null,
+   "latency_s": 8.12,
+   "answered": true,
+   "gold_hit": true,
+   "retrieval_hit": true,
+   "include_ok": true,
+   "missing": [],
+   "violations": [],
+   "cited": [
+    "도시정비법 시행령 제54조",
+    "토지보상법 시행규칙 제47조"
+   ],
+   "summary": "휴업 보상 기간은 원칙적으로 4개월이고, 예외적인 경우에는 실제 휴업기간(최대 2년)까지 인정돼요.",
+   "points": [
+    "영업장소를 옮겨야 해서 생기는 휴업 손실은 원칙적으로 휴업기간 4개월치를 기준으로 계산해요.",
+    "다만 영업을 금지·제한받아 4개월 넘게 영업을 못 하거나, 시설 규모가 크거나 정밀해서 4개월 안에 옮기기 어렵다고 인정되면 실제 휴업기간으로 계산하되, 그 기간은 2년을 넘을 수 없어요.",
+    "휴업하지 않고 임시영업소를 설치해서 계속 영업하는 경우에는 그 임시영업소 설치비용으로 보상액을 계산해요."
+   ],
+   "judge": [
+    {
+     "index": 0,
+     "label": "supported",
+     "reason": "제47조 제1항·제2항이 영업장소 이전 시 휴업기간을 4개월 이내로 규정하고 있어 요점과 일치한다."
+    },
+    {
+     "index": 1,
+     "label": "supported",
+     "reason": "인용된 도시정비법 시행령 제54조 제2항 단서가 두 예외사유와 2년 상한을 그대로 담고 있다."
+    },
+    {
+     "index": 2,
+     "label": "partial",
+     "reason": "임시영업소 설치비용 평가는 맞으나 보상액이 제1항 평가액을 초과할 수 없다는 한도가 생략되었다."
+    }
+   ]
+  },
+  {
+   "id": "TP1-S-06",
+   "category": "C",
+   "split": "test",
+   "question": "상가 보증금은 누구한테 돌려받아요?",
+   "outcome": "answered",
+   "refusal_category": null,
+   "latency_s": 7.58,
+   "answered": true,
+   "gold_hit": true,
+   "retrieval_hit": true,
+   "include_ok": true,
+   "missing": [],
+   "violations": [],
+   "cited": [
+    "도시정비법 제70조"
+   ],
+   "summary": "정비사업으로 가게를 계속 쓸 수 없게 되면 임차권 계약을 해지하고, 보증금 반환은 사업시행자에게 청구할 수 있어요.",
+   "points": [
+    "정비사업 시행으로 임차권을 유지할 목적을 이룰 수 없게 되면 계약을 해지할 수 있고, 이때 보증금 반환청구권은 사업시행자에게 행사할 수 있어요.",
+    "사업시행자가 보증금을 대신 지급하면, 그 돈을 건물 주인(토지등소유자)에게 다시 청구할 수 있어요."
+   ],
+   "judge": [
+    {
+     "index": 0,
+     "label": "supported",
+     "reason": "제70조 제1항과 제2항 내용을 그대로 반영한다."
+    },
+    {
+     "index": 1,
+     "label": "supported",
+     "reason": "제70조 제3항의 구상권 규정과 일치한다."
+    }
+   ]
+  },
+  {
+   "id": "TP1-S-08",
+   "category": "D",
+   "split": "test",
+   "question": "영업보상 금액은 어떻게 계산해요?",
+   "outcome": "answered",
+   "refusal_category": null,
+   "latency_s": 10.41,
+   "answered": true,
+   "gold_hit": true,
+   "retrieval_hit": true,
+   "include_ok": true,
+   "missing": [],
+   "violations": [],
+   "cited": [
+    "토지보상법 시행규칙 제46조",
+    "토지보상법 시행규칙 제47조"
+   ],
+   "summary": "영업장소를 옮기는 경우엔 휴업기간 영업이익에 이전비용 등을 더해서 계산하고, 임차인은 보상액에 상한이 있어요.",
+   "points": [
+    "영업장소를 옮겨야 할 때는 휴업기간 동안의 영업이익과 이전 후 영업이익 감소액에, 이전비용 등을 더한 금액으로 계산해요. 휴업기간은 원칙적으로 4개월 이내예요.",
+    "가게 세입자(임차인)의 경우, 영업시설 이전비용을 뺀 보상액은 1천만원을 넘을 수 없어요.",
+    "다른 곳에서는 도저히 영업을 계속할 수 없는 경우처럼 폐업으로 인정되면, 2년치 영업이익에 자산 매각손실액을 더해서 계산해요."
+   ],
+   "judge": [
+    {
+     "index": 0,
+     "label": "supported",
+     "reason": "제47조 제1항과 제2항이 산정방식과 4개월 이내 휴업기간을 그대로 규정하고 있다."
+    },
+    {
+     "index": 1,
+     "label": "supported",
+     "reason": "제47조 제6항이 임차인 영업보상액 중 이전비용 제외 금액은 1천만원을 초과하지 못한다고 규정한다."
+    },
+    {
+     "index": 2,
+     "label": "supported",
+     "reason": "제46조 제1항·제2항이 폐업 시 2년간 영업이익에 매각손실액을 더한 금액으로 평가하며 이전 불가 사유를 폐업으로 정한다."
+    }
+   ]
+  },
+  {
+   "id": "TP1-S-10",
+   "category": "E",
+   "split": "test",
+   "question": "이 동네 상가 권리금 시세가 앞으로 어떻게 될까요?",
+   "outcome": "refused_policy",
+   "refusal_category": "price_forecast",
+   "latency_s": 3.05,
+   "answered": false,
+   "gold_hit": null,
+   "retrieval_hit": null,
+   "include_ok": null,
+   "missing": [],
+   "violations": [],
+   "cited": [],
+   "summary": null,
+   "points": []
+  },
+  {
+   "id": "TP1-T-02",
+   "category": "A",
+   "split": "test",
+   "question": "생활권 재개발 후보지 행위제한 고시가 뭐예요?",
+   "outcome": "answered",
+   "refusal_category": null,
+   "latency_s": 10.38,
+   "answered": true,
+   "gold_hit": true,
+   "retrieval_hit": true,
+   "include_ok": true,
+   "missing": [],
+   "violations": [],
+   "cited": [
+    "도시정비법 제19조",
+    "성남시 고시 제2025-275호"
+   ],
+   "summary": "생활권 재개발 후보지에서 함부로 건축이나 토지분할 같은 행위를 못 하게 성남시가 미리 막아두는 고시예요.",
+   "points": [
+    "태평1구역을 포함한 생활권 재개발 후보지에서는 비경제적인 건축행위나 투기수요 유입을 막기 위해 건축물의 건축, 토지의 분할 등을 제한해요.",
+    "제한 대상 행위는 건축물의 건축, 토지의 분할, 일반건축물대장을 집합건축물대장으로 전환하는 것, 집합건축물대장 전유부분 분할이에요.",
+    "이 제한은 기본계획을 공람 중이거나 정비계획을 수립 중인 지역에 3년 이내 기간(1년 범위에서 한 차례 연장 가능) 동안 걸 수 있어요."
+   ],
+   "judge": [
+    {
+     "index": 0,
+     "label": "supported",
+     "reason": "고시에 태평1구역 포함 및 제한사유·대상행위(건축, 토지분할)가 그대로 기재되어 있다."
+    },
+    {
+     "index": 1,
+     "label": "supported",
+     "reason": "고시 제4항의 네 가지 제한 대상행위와 일치한다."
+    },
+    {
+     "index": 2,
+     "label": "supported",
+     "reason": "제19조 제7항의 대상 지역과 3년 이내(1년 1회 연장) 기간 규정과 일치한다."
+    }
+   ]
+  },
+  {
+   "id": "TP1-T-04",
+   "category": "B",
+   "split": "test",
+   "question": "주거이전비는 몇 개월치예요?",
+   "outcome": "answered",
+   "refusal_category": null,
+   "latency_s": 7.67,
+   "answered": true,
+   "gold_hit": true,
+   "retrieval_hit": true,
+   "include_ok": true,
+   "missing": [],
+   "violations": [],
+   "cited": [
+    "토지보상법 시행규칙 제54조"
+   ],
+   "summary": "세입자는 주거이전비로 가구원수에 따라 4개월분을 받을 수 있어요.",
+   "points": [
+    "세입자는 사업인정고시일등 당시 해당 구역에서 3개월 이상 거주한 경우 가구원수에 따라 4개월분의 주거이전비를 받아요.",
+    "다만 무허가건축물에 사는 세입자는 1년 이상 거주해야 이 4개월분을 받을 수 있어요."
+   ],
+   "judge": [
+    {
+     "index": 0,
+     "label": "supported",
+     "reason": "제54조 제2항이 사업인정고시일등 당시 3개월 이상 거주 세입자에게 가구원수에 따라 4개월분 주거이전비 보상을 규정한다."
+    },
+    {
+     "index": 1,
+     "label": "supported",
+     "reason": "제54조 제2항 단서가 무허가건축물등 입주 세입자는 1년 이상 거주 시 보상한다고 규정한다."
+    }
+   ]
+  },
+  {
+   "id": "TP1-T-06",
+   "category": "C",
+   "split": "test",
+   "question": "보증금은 누구한테 돌려받아요?",
+   "outcome": "answered",
+   "refusal_category": null,
+   "latency_s": 7.59,
+   "answered": true,
+   "gold_hit": true,
+   "retrieval_hit": true,
+   "include_ok": true,
+   "missing": [],
+   "violations": [],
+   "cited": [
+    "도시정비법 제70조",
+    "우리 구역 진행 현황"
+   ],
+   "summary": "임대차 계약을 해지하면 보증금은 사업시행자(조합)에게 돌려달라고 청구할 수 있어요.",
+   "points": [
+    "정비사업 때문에 세입자로서 계약을 유지할 이유가 없어지면 계약을 해지할 수 있고, 그때 보증금 반환 청구는 사업시행자한테 할 수 있어요.",
+    "태평1구역은 조합 시행 방식이라, 여기서 사업시행자는 조합이 돼요.",
+    "조합이 보증금을 대신 내준 뒤에는, 집주인(토지등소유자)에게 그 돈을 다시 청구할 수 있어요."
+   ],
+   "judge": [
+    {
+     "index": 0,
+     "label": "supported",
+     "reason": "제70조 제1항·제2항이 계약 해지와 사업시행자에 대한 보증금 반환청구권을 그대로 규정한다."
+    },
+    {
+     "index": 1,
+     "label": "partial",
+     "reason": "사업 방식이 조합 시행이라는 점은 자료에 있으나, 조합이 곧 사업시행자라는 법적 등치는 인용 문서에 명시되어 있지 않다."
+    },
+    {
+     "index": 2,
+     "label": "supported",
+     "reason": "제70조 제3항의 사업시행자가 토지등소유자에게 구상할 수 있다는 내용과 일치한다."
+    }
+   ]
+  },
+  {
+   "id": "TP1-T-08",
+   "category": "D",
+   "split": "test",
+   "question": "집주인만 조합원인데 세입자인 저는 받을 게 없는 거죠?",
+   "outcome": "answered",
+   "refusal_category": null,
+   "latency_s": 8.48,
+   "answered": true,
+   "gold_hit": true,
+   "retrieval_hit": true,
+   "include_ok": true,
+   "missing": [],
+   "violations": [],
+   "cited": [
+    "토지보상법 시행규칙 제54조"
+   ],
+   "summary": "아니에요, 세입자도 일정 조건을 채우면 주거이전비와 임대주택 입주 자격을 받을 수 있어요.",
+   "points": [
+    "세입자도 사업인정고시일 등 당시 그 구역에서 3개월 이상 거주했다면 가구원수에 따라 4개월분 주거이전비를 받을 수 있어요."
+   ],
+   "judge": [
+    {
+     "index": 0,
+     "label": "supported",
+     "reason": "제54조 제2항이 사업인정고시일등 당시 3개월 이상 거주한 세입자에게 가구원수에 따라 4개월분 주거이전비를 보상하도록 규정하고 있어 요점과 일치한다."
+    }
+   ]
+  },
+  {
+   "id": "TP1-T-10",
+   "category": "E",
+   "split": "test",
+   "question": "전세대출은 어느 은행에서 받는 게 좋아요?",
+   "outcome": "refused_policy",
+   "refusal_category": "financial_product",
+   "latency_s": 0.01,
+   "answered": false,
+   "gold_hit": null,
+   "retrieval_hit": null,
+   "include_ok": null,
+   "missing": [],
+   "violations": [],
+   "cited": [],
+   "summary": null,
+   "points": []
+  }
+ ]
+}

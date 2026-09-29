@@ -30,7 +30,7 @@ from woori.text import normalize
 log = logging.getLogger(__name__)
 
 MIN_COVERAGE = 0.2
-MAX_POINTS = 4
+MAX_POINTS = 3
 STAGE_QUESTION = re.compile(r"몇\s*단계|어디까지|진행\s*상황|언제\s*(났|됐|되|승인|인가|지정|시작)|지금\s*단계")
 ZONE_DOC_ID = "Z"
 ZONE_DOC_LABEL = "우리 구역 진행 현황"
@@ -222,7 +222,7 @@ def ask(zone_id: str, resident_type: str, question: str, emit: Emit | None = Non
         f"<question>{question}</question>"
     )
     req = JsonRequest(task="answer", system=prompts.ANSWER_SYSTEM, user=user, schema=prompts.ANSWER_SCHEMA,
-                      effort="low", max_tokens=1600)
+                      effort="low", max_tokens=1200)
     router = answer_router()
     emit("verify")
     for attempt in range(2):
@@ -257,7 +257,7 @@ def ask(zone_id: str, resident_type: str, question: str, emit: Emit | None = Non
             user=user + "\n<note>이전 답변의 인용 구절이 문서 원문과 일치하지 않았다. quote 는 문서에서 글자 그대로 복사한다.</note>",
             schema=prompts.ANSWER_SCHEMA,
             effort="low",
-            max_tokens=1600,
+            max_tokens=1200,
         )
     else:
         return finish("refused_verification", refusal=refusal_payload(c, "no_evidence", resident_type))
