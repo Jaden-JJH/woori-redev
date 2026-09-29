@@ -172,6 +172,7 @@ def ask(zone_id: str, resident_type: str, question: str, emit: Emit | None = Non
             "points": [],
             "next_step": None,
             "terms": [],
+            "related_items": [],
             "refusal": None,
             "data_as_of": zone.as_of.isoformat(),
         }
@@ -278,7 +279,43 @@ def ask(zone_id: str, resident_type: str, question: str, emit: Emit | None = Non
         points=points,
         next_step=next_action(c, zone, resident_type),
         terms=_glossary_hits(c, text_all),
+        related_items=related_items(c, zone, resident_type, [ci["source_label"] for p in points for ci in p["citations"]]),
     )
+
+
+def _article(ref: str) -> str:
+    """'토지보상법 시행규칙 제47조제6항' -> '토지보상법 시행규칙 제47조'"""
+    m = re.match(r"(.+?제\d+조(?:의\d+)?)", ref.strip())
+    return m.group(1) if m else ref.strip()
+
+
+def related_items(c: Content, zone, resident_type: str, cited_labels: list[str], limit: int = 2) -> list[dict]:
+    """답변이 인용한 조문과 같은 조문을 근거로 하는 검수된 체크리스트 항목. 조건이 까다로운 부분을 사람이 쓴 문장으로 보완한다."""
+    cited = {_article(label) for label in cited_labels}
+    out = []
+    # 지금 단계에 해당하는 항목을 먼저 고른다.
+    for item in sorted(c.checklists[resident_type], key=lambda i: zone.current_stage not in i.stages):
+        if zone.impl_type not in item.impl_types:
+            continue
+        # legal_basis 는 '토지보상법 시행규칙 제45조, 제47조제1항, 도시정비법 제65조' 처럼 법령명이 생략되기도 한다.
+        refs, law = [], ""
+        for part in (p.strip() for p in item.legal_basis.split(",")):
+            m = re.match(r"(.*?)\s*(제\d+조.*|별표.*)$", part)
+            if m and m.group(1):
+                law = m.group(1).strip()
+            refs.append(_article(f"{law} {m.group(2)}" if m else part))
+        if cited & set(refs):
+            out.append({
+                "id": item.id,
+                "kind": item.kind,
+                "title": item.title,
+                "body": " ".join(item.plain_body.split()),
+                "conditions": " ".join(item.conditions.split()) if item.conditions else None,
+                "legal_basis": item.legal_basis,
+            })
+        if len(out) >= limit:
+            break
+    return out
 
 
 def next_action(c: Content, zone, resident_type: str) -> str | None:
