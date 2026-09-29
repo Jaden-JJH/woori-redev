@@ -1,0 +1,726 @@
+# 우리동네 재개발 비서 골든셋 v1 (90문항 = 3구역 x 3유형 x 10문항)
+# category: A 구역 사실, B 절차와 권리, C 유형 특화, D 경계 질문(절차로 답해야 함), E 범위 밖(거부해야 함)
+# origin: notice = 성남시 고시에서 작성, law = 조문에서 역산, scenario = 주민 상황을 가정해 개발 중 작성. 실제 주민 인터뷰 문항은 interview 로 추가한다.
+# split: dev 는 임계값과 프롬프트 튜닝에만, test 는 최종 보고에만 쓴다.
+# gold_sources: 인용 출처 라벨 중 하나라도 맞으면 적중. must_include: 항목마다 '|' 로 대안, 항목 전부 충족해야 통과.
+items:
+  - id: TP1-O-01
+    zone: taepyeong1
+    resident_type: owner
+    category: A
+    split: dev
+    origin: notice
+    question: "우리 구역 추진위원회는 언제 승인됐어요?"
+    expected: {"answerable": true, "gold_sources": ["성남시 고시 제2026-71호", "우리 구역 진행 현황"], "must_include": ["2026"], "must_not_include": []}
+  - id: TP1-O-02
+    zone: taepyeong1
+    resident_type: owner
+    category: A
+    split: test
+    origin: notice
+    question: "태평1구역은 지금 몇 단계예요?"
+    expected: {"answerable": true, "gold_sources": ["우리 구역 진행 현황"], "must_include": ["정비구역"], "must_not_include": []}
+  - id: TP1-O-03
+    zone: taepyeong1
+    resident_type: owner
+    category: B
+    split: dev
+    origin: law
+    question: "분양신청 안 하면 어떻게 되나요?"
+    expected: {"answerable": true, "gold_sources": ["도시정비법 제73조"], "must_include": ["현금청산|손실보상"], "must_not_include": []}
+  - id: TP1-O-04
+    zone: taepyeong1
+    resident_type: owner
+    category: B
+    split: test
+    origin: law
+    question: "분양신청 기간은 얼마나 돼요?"
+    expected: {"answerable": true, "gold_sources": ["도시정비법 제72조"], "must_include": ["30일", "60일"], "must_not_include": []}
+  - id: TP1-O-05
+    zone: taepyeong1
+    resident_type: owner
+    category: B
+    split: dev
+    origin: law
+    question: "조합 만들려면 몇 명이 동의해야 해요?"
+    expected: {"answerable": true, "gold_sources": ["도시정비법 제35조"], "must_include": ["4분의 3|3/4|75"], "must_not_include": []}
+  - id: TP1-O-06
+    zone: taepyeong1
+    resident_type: owner
+    category: C
+    split: test
+    origin: scenario
+    question: "추진위원회 만들 때 동의했는데 조합설립에도 동의한 걸로 되나요?"
+    expected: {"answerable": true, "gold_sources": ["도시정비법 제31조"], "must_include": ["동의한 것으로|동의한 걸로"], "must_not_include": []}
+  - id: TP1-O-07
+    zone: taepyeong1
+    resident_type: owner
+    category: C
+    split: dev
+    origin: scenario
+    question: "관리처분 인가 나면 집을 언제 비워야 해요?"
+    expected: {"answerable": true, "gold_sources": ["도시정비법 제81조"], "must_include": ["관리처분"], "must_not_include": []}
+  - id: TP1-O-08
+    zone: taepyeong1
+    resident_type: owner
+    category: D
+    split: test
+    origin: scenario
+    question: "주민설명회에서 받은 추정분담금이 확정 금액인가요?"
+    expected: {"answerable": true, "gold_sources": ["도시정비법 시행령 제32조", "도시정비법 제9조", "도시정비법 제74조", "성남시 도시정비 조례 제23조", "우리 구역 진행 현황"], "must_include": ["추정|추산"], "must_not_include": ["확정 금액이에요", "확정된 금액이에요"]}
+  - id: TP1-O-09
+    zone: taepyeong1
+    resident_type: owner
+    category: E
+    split: dev
+    origin: scenario
+    question: "재개발되면 우리 집 값 얼마나 오를까요?"
+    expected: {"answerable": false, "gold_sources": [], "must_include": [], "must_not_include": []}
+  - id: TP1-O-10
+    zone: taepyeong1
+    resident_type: owner
+    category: E
+    split: test
+    origin: scenario
+    question: "우리 집 분담금 정확히 얼마 나와요? 계산해 주세요"
+    expected: {"answerable": false, "gold_sources": [], "must_include": [], "must_not_include": []}
+  - id: EG2-O-01
+    zone: eunhaeng1-geumgwang2
+    resident_type: owner
+    category: A
+    split: dev
+    origin: notice
+    question: "은행1-금광2구역 추진위원회 승인은 언제였어요?"
+    expected: {"answerable": true, "gold_sources": ["성남시 고시 제2026-41호", "우리 구역 진행 현황"], "must_include": ["2026"], "must_not_include": []}
+  - id: EG2-O-02
+    zone: eunhaeng1-geumgwang2
+    resident_type: owner
+    category: A
+    split: test
+    origin: notice
+    question: "은행1구역이랑 금광2구역은 따로 진행하는 거예요?"
+    expected: {"answerable": true, "gold_sources": ["우리 구역 진행 현황", "성남시 고시 제2026-41호"], "must_include": ["하나|함께|묶"], "must_not_include": []}
+  - id: EG2-O-03
+    zone: eunhaeng1-geumgwang2
+    resident_type: owner
+    category: B
+    split: dev
+    origin: law
+    question: "새 아파트 받으려면 언제 신청해요?"
+    expected: {"answerable": true, "gold_sources": ["도시정비법 제72조"], "must_include": ["분양신청"], "must_not_include": []}
+  - id: EG2-O-04
+    zone: eunhaeng1-geumgwang2
+    resident_type: owner
+    category: B
+    split: test
+    origin: law
+    question: "분담금은 언제 확정돼요?"
+    expected: {"answerable": true, "gold_sources": ["도시정비법 제74조", "도시정비법 제78조"], "must_include": ["관리처분"], "must_not_include": []}
+  - id: EG2-O-05
+    zone: eunhaeng1-geumgwang2
+    resident_type: owner
+    category: B
+    split: dev
+    origin: law
+    question: "정비계획에 주민이 의견 낼 수 있어요?"
+    expected: {"answerable": true, "gold_sources": ["도시정비법 제15조", "도시정비법 시행령 제13조"], "must_include": ["공람|30일"], "must_not_include": []}
+  - id: EG2-O-06
+    zone: eunhaeng1-geumgwang2
+    resident_type: owner
+    category: C
+    split: test
+    origin: scenario
+    question: "조합설립 동의하기 전에 분담금을 알려주나요?"
+    expected: {"answerable": true, "gold_sources": ["도시정비법 제35조", "도시정비법 시행령 제32조", "성남시 도시정비 조례 제23조"], "must_include": ["추산액|추정분담금|분담금"], "must_not_include": []}
+  - id: EG2-O-07
+    zone: eunhaeng1-geumgwang2
+    resident_type: owner
+    category: C
+    split: dev
+    origin: scenario
+    question: "분양신청 안 한 사람은 언제까지 보상 협의해요?"
+    expected: {"answerable": true, "gold_sources": ["도시정비법 제73조"], "must_include": ["90일"], "must_not_include": []}
+  - id: EG2-O-08
+    zone: eunhaeng1-geumgwang2
+    resident_type: owner
+    category: D
+    split: test
+    origin: scenario
+    question: "추정분담금이 나중에 많이 오르면 어떻게 돼요?"
+    expected: {"answerable": true, "gold_sources": ["도시정비법 제78조", "도시정비법 제74조"], "must_include": ["관리처분"], "must_not_include": []}
+  - id: EG2-O-09
+    zone: eunhaeng1-geumgwang2
+    resident_type: owner
+    category: E
+    split: dev
+    origin: scenario
+    question: "지금 집 팔까요, 버틸까요?"
+    expected: {"answerable": false, "gold_sources": [], "must_include": [], "must_not_include": []}
+  - id: EG2-O-10
+    zone: eunhaeng1-geumgwang2
+    resident_type: owner
+    category: E
+    split: test
+    origin: scenario
+    question: "이주비 대출은 어느 은행이 제일 좋아요?"
+    expected: {"answerable": false, "gold_sources": [], "must_include": [], "must_not_include": []}
+  - id: SJ1-O-01
+    zone: sujin1
+    resident_type: owner
+    category: A
+    split: dev
+    origin: notice
+    question: "수진1구역 관리처분 인가는 언제 났어요?"
+    expected: {"answerable": true, "gold_sources": ["성남시 고시 제2026-216호", "우리 구역 진행 현황"], "must_include": ["2026"], "must_not_include": []}
+  - id: SJ1-O-02
+    zone: sujin1
+    resident_type: owner
+    category: A
+    split: test
+    origin: notice
+    question: "수진1구역은 몇 세대를 지어요?"
+    expected: {"answerable": true, "gold_sources": ["우리 구역 진행 현황", "성남시 고시 제2026-216호"], "must_include": ["5,060|5060"], "must_not_include": []}
+  - id: SJ1-O-03
+    zone: sujin1
+    resident_type: owner
+    category: B
+    split: dev
+    origin: law
+    question: "관리처분 인가 났는데 집을 계속 써도 돼요?"
+    expected: {"answerable": true, "gold_sources": ["도시정비법 제81조"], "must_include": ["사용|쓸 수"], "must_not_include": []}
+  - id: SJ1-O-04
+    zone: sujin1
+    resident_type: owner
+    category: B
+    split: test
+    origin: law
+    question: "분양신청 안 한 사람은 어떻게 돼요?"
+    expected: {"answerable": true, "gold_sources": ["도시정비법 제73조"], "must_include": ["손실보상|현금청산"], "must_not_include": []}
+  - id: SJ1-O-05
+    zone: sujin1
+    resident_type: owner
+    category: B
+    split: dev
+    origin: law
+    question: "이사 나갈 때 이사비 받을 수 있어요?"
+    expected: {"answerable": true, "gold_sources": ["토지보상법 시행규칙 제55조"], "must_include": ["이사비"], "must_not_include": []}
+  - id: SJ1-O-06
+    zone: sujin1
+    resident_type: owner
+    category: C
+    split: test
+    origin: scenario
+    question: "조합이 없다는데 누가 주민 의견을 전달해요?"
+    expected: {"answerable": true, "gold_sources": ["도시정비법 제47조", "우리 구역 진행 현황"], "must_include": ["주민대표회의"], "must_not_include": []}
+  - id: SJ1-O-07
+    zone: sujin1
+    resident_type: owner
+    category: C
+    split: dev
+    origin: scenario
+    question: "새 집 소유권은 언제 받아요?"
+    expected: {"answerable": true, "gold_sources": ["도시정비법 제86조"], "must_include": ["이전고시"], "must_not_include": []}
+  - id: SJ1-O-08
+    zone: sujin1
+    resident_type: owner
+    category: D
+    split: test
+    origin: scenario
+    question: "이제 분담금은 확정된 거예요?"
+    expected: {"answerable": true, "gold_sources": ["도시정비법 제74조", "우리 구역 진행 현황"], "must_include": ["관리처분"], "must_not_include": []}
+  - id: SJ1-O-09
+    zone: sujin1
+    resident_type: owner
+    category: E
+    split: dev
+    origin: scenario
+    question: "수진1 입주권 지금 사두면 돈 될까요?"
+    expected: {"answerable": false, "gold_sources": [], "must_include": [], "must_not_include": []}
+  - id: SJ1-O-10
+    zone: sujin1
+    resident_type: owner
+    category: E
+    split: test
+    origin: scenario
+    question: "우리 집 분담금 계산해 주세요"
+    expected: {"answerable": false, "gold_sources": [], "must_include": [], "must_not_include": []}
+  - id: TP1-T-01
+    zone: taepyeong1
+    resident_type: tenant
+    category: A
+    split: dev
+    origin: notice
+    question: "우리 구역 재개발은 지금 어디까지 왔어요?"
+    expected: {"answerable": true, "gold_sources": ["우리 구역 진행 현황"], "must_include": ["정비구역|추진위원회"], "must_not_include": []}
+  - id: TP1-T-02
+    zone: taepyeong1
+    resident_type: tenant
+    category: A
+    split: test
+    origin: notice
+    question: "생활권 재개발 후보지 행위제한 고시가 뭐예요?"
+    expected: {"answerable": true, "gold_sources": ["성남시 고시 제2025-275호"], "must_include": ["제한"], "must_not_include": []}
+  - id: TP1-T-03
+    zone: taepyeong1
+    resident_type: tenant
+    category: B
+    split: dev
+    origin: law
+    question: "세입자도 이사비 받을 수 있나요?"
+    expected: {"answerable": true, "gold_sources": ["토지보상법 시행규칙 제54조", "토지보상법 시행규칙 제55조"], "must_include": ["주거이전비|이사비"], "must_not_include": []}
+  - id: TP1-T-04
+    zone: taepyeong1
+    resident_type: tenant
+    category: B
+    split: test
+    origin: law
+    question: "주거이전비는 몇 개월치예요?"
+    expected: {"answerable": true, "gold_sources": ["토지보상법 시행규칙 제54조"], "must_include": ["4개월"], "must_not_include": []}
+  - id: TP1-T-05
+    zone: taepyeong1
+    resident_type: tenant
+    category: B
+    split: dev
+    origin: law
+    question: "세입자는 언제부터 살았어야 보상받아요?"
+    expected: {"answerable": true, "gold_sources": ["도시정비법 시행령 제54조", "토지보상법 시행규칙 제54조"], "must_include": ["공람공고|3개월"], "must_not_include": []}
+  - id: TP1-T-06
+    zone: taepyeong1
+    resident_type: tenant
+    category: C
+    split: test
+    origin: scenario
+    question: "보증금은 누구한테 돌려받아요?"
+    expected: {"answerable": true, "gold_sources": ["도시정비법 제70조"], "must_include": ["사업시행자"], "must_not_include": []}
+  - id: TP1-T-07
+    zone: taepyeong1
+    resident_type: tenant
+    category: C
+    split: dev
+    origin: scenario
+    question: "재개발 임대주택에 들어갈 수 있어요?"
+    expected: {"answerable": true, "gold_sources": ["성남시 도시정비 조례 제39조", "도시정비법 시행령 별표 3"], "must_include": ["무주택|세입자"], "must_not_include": []}
+  - id: TP1-T-08
+    zone: taepyeong1
+    resident_type: tenant
+    category: D
+    split: test
+    origin: scenario
+    question: "집주인만 조합원인데 세입자인 저는 받을 게 없는 거죠?"
+    expected: {"answerable": true, "gold_sources": ["토지보상법 시행규칙 제54조", "도시정비법 제70조"], "must_include": ["주거이전비"], "must_not_include": []}
+  - id: TP1-T-09
+    zone: taepyeong1
+    resident_type: tenant
+    category: E
+    split: dev
+    origin: scenario
+    question: "소송하면 이사비 더 받을 수 있나요?"
+    expected: {"answerable": false, "gold_sources": [], "must_include": [], "must_not_include": []}
+  - id: TP1-T-10
+    zone: taepyeong1
+    resident_type: tenant
+    category: E
+    split: test
+    origin: scenario
+    question: "전세대출은 어느 은행에서 받는 게 좋아요?"
+    expected: {"answerable": false, "gold_sources": [], "must_include": [], "must_not_include": []}
+  - id: EG2-T-01
+    zone: eunhaeng1-geumgwang2
+    resident_type: tenant
+    category: A
+    split: dev
+    origin: notice
+    question: "은행1-금광2구역은 지금 몇 단계예요?"
+    expected: {"answerable": true, "gold_sources": ["우리 구역 진행 현황"], "must_include": ["정비구역"], "must_not_include": []}
+  - id: EG2-T-02
+    zone: eunhaeng1-geumgwang2
+    resident_type: tenant
+    category: A
+    split: test
+    origin: notice
+    question: "은행1-금광2구역은 어디에 있어요?"
+    expected: {"answerable": true, "gold_sources": ["우리 구역 진행 현황", "성남시 고시 제2026-41호"], "must_include": ["은행동"], "must_not_include": []}
+  - id: EG2-T-03
+    zone: eunhaeng1-geumgwang2
+    resident_type: tenant
+    category: B
+    split: dev
+    origin: law
+    question: "월세 사는데 이사 가면 보상이 있나요?"
+    expected: {"answerable": true, "gold_sources": ["토지보상법 시행규칙 제54조", "토지보상법 시행규칙 제55조"], "must_include": ["주거이전비|이사비"], "must_not_include": []}
+  - id: EG2-T-04
+    zone: eunhaeng1-geumgwang2
+    resident_type: tenant
+    category: B
+    split: test
+    origin: law
+    question: "주거이전비는 누가 받을 수 있어요?"
+    expected: {"answerable": true, "gold_sources": ["토지보상법 시행규칙 제54조", "도시정비법 시행령 제54조"], "must_include": ["세입자"], "must_not_include": []}
+  - id: EG2-T-05
+    zone: eunhaeng1-geumgwang2
+    resident_type: tenant
+    category: B
+    split: dev
+    origin: law
+    question: "이사비 받은 뒤 같은 구역 안으로 이사하면요?"
+    expected: {"answerable": true, "gold_sources": ["토지보상법 시행규칙 제55조"], "must_include": ["받지|보상하지"], "must_not_include": []}
+  - id: EG2-T-06
+    zone: eunhaeng1-geumgwang2
+    resident_type: tenant
+    category: C
+    split: test
+    origin: scenario
+    question: "전세 보증금 못 받으면 어떻게 해요?"
+    expected: {"answerable": true, "gold_sources": ["도시정비법 제70조"], "must_include": ["사업시행자"], "must_not_include": []}
+  - id: EG2-T-07
+    zone: eunhaeng1-geumgwang2
+    resident_type: tenant
+    category: C
+    split: dev
+    origin: scenario
+    question: "세입자 임대주택 1순위는 누구예요?"
+    expected: {"answerable": true, "gold_sources": ["성남시 도시정비 조례 제39조"], "must_include": ["무주택"], "must_not_include": []}
+  - id: EG2-T-08
+    zone: eunhaeng1-geumgwang2
+    resident_type: tenant
+    category: D
+    split: test
+    origin: scenario
+    question: "세입자 보상은 얼마나 나와요?"
+    expected: {"answerable": true, "gold_sources": ["토지보상법 시행규칙 제54조"], "must_include": ["가구원|4개월"], "must_not_include": []}
+  - id: EG2-T-09
+    zone: eunhaeng1-geumgwang2
+    resident_type: tenant
+    category: E
+    split: dev
+    origin: scenario
+    question: "재개발 소송하면 이길 수 있나요?"
+    expected: {"answerable": false, "gold_sources": [], "must_include": [], "must_not_include": []}
+  - id: EG2-T-10
+    zone: eunhaeng1-geumgwang2
+    resident_type: tenant
+    category: E
+    split: test
+    origin: scenario
+    question: "집주인이 믿을 만한 사람인지 알려주세요 조합장도요"
+    expected: {"answerable": false, "gold_sources": [], "must_include": [], "must_not_include": []}
+  - id: SJ1-T-01
+    zone: sujin1
+    resident_type: tenant
+    category: A
+    split: dev
+    origin: notice
+    question: "수진1구역 사업시행자는 누구예요?"
+    expected: {"answerable": true, "gold_sources": ["성남시 고시 제2026-216호", "우리 구역 진행 현황"], "must_include": ["한국토지주택공사|LH"], "must_not_include": []}
+  - id: SJ1-T-02
+    zone: sujin1
+    resident_type: tenant
+    category: A
+    split: test
+    origin: notice
+    question: "수진1구역은 지금 이주 단계인가요?"
+    expected: {"answerable": true, "gold_sources": ["우리 구역 진행 현황"], "must_include": ["이주"], "must_not_include": []}
+  - id: SJ1-T-03
+    zone: sujin1
+    resident_type: tenant
+    category: B
+    split: dev
+    origin: law
+    question: "이사 나가면 돈 받을 수 있나요?"
+    expected: {"answerable": true, "gold_sources": ["토지보상법 시행규칙 제54조", "토지보상법 시행규칙 제55조"], "must_include": ["주거이전비"], "must_not_include": []}
+  - id: SJ1-T-04
+    zone: sujin1
+    resident_type: tenant
+    category: B
+    split: test
+    origin: law
+    question: "계약기간이 남았는데 계속 살아도 돼요?"
+    expected: {"answerable": true, "gold_sources": ["도시정비법 제70조", "도시정비법 제81조"], "must_include": ["관리처분"], "must_not_include": []}
+  - id: SJ1-T-05
+    zone: sujin1
+    resident_type: tenant
+    category: B
+    split: dev
+    origin: law
+    question: "보상이 안 끝났는데 나가야 하나요?"
+    expected: {"answerable": true, "gold_sources": ["도시정비법 제81조"], "must_include": ["손실보상|보상"], "must_not_include": []}
+  - id: SJ1-T-06
+    zone: sujin1
+    resident_type: tenant
+    category: C
+    split: test
+    origin: scenario
+    question: "보증금을 LH한테 달라고 해도 돼요?"
+    expected: {"answerable": true, "gold_sources": ["도시정비법 제70조"], "must_include": ["사업시행자|LH|한국토지주택공사"], "must_not_include": []}
+  - id: SJ1-T-07
+    zone: sujin1
+    resident_type: tenant
+    category: C
+    split: dev
+    origin: scenario
+    question: "세입자도 LH에 의견을 낼 수 있어요?"
+    expected: {"answerable": true, "gold_sources": ["도시정비법 제47조"], "must_include": ["의견"], "must_not_include": []}
+  - id: SJ1-T-08
+    zone: sujin1
+    resident_type: tenant
+    category: D
+    split: test
+    origin: scenario
+    question: "주거이전비는 얼마나 나와요?"
+    expected: {"answerable": true, "gold_sources": ["토지보상법 시행규칙 제54조"], "must_include": ["가구원"], "must_not_include": []}
+  - id: SJ1-T-09
+    zone: sujin1
+    resident_type: tenant
+    category: E
+    split: dev
+    origin: scenario
+    question: "LH 상대로 소송하면 이길까요?"
+    expected: {"answerable": false, "gold_sources": [], "must_include": [], "must_not_include": []}
+  - id: SJ1-T-10
+    zone: sujin1
+    resident_type: tenant
+    category: E
+    split: test
+    origin: scenario
+    question: "이사비로 주식 투자해도 될까요?"
+    expected: {"answerable": false, "gold_sources": [], "must_include": [], "must_not_include": []}
+  - id: TP1-S-01
+    zone: taepyeong1
+    resident_type: shop_tenant
+    category: A
+    split: dev
+    origin: notice
+    question: "태평1구역은 지금 어느 단계예요?"
+    expected: {"answerable": true, "gold_sources": ["우리 구역 진행 현황"], "must_include": ["정비구역"], "must_not_include": []}
+  - id: TP1-S-02
+    zone: taepyeong1
+    resident_type: shop_tenant
+    category: A
+    split: test
+    origin: notice
+    question: "태평1구역 추진위원회는 언제 생겼어요?"
+    expected: {"answerable": true, "gold_sources": ["성남시 고시 제2026-71호", "우리 구역 진행 현황"], "must_include": ["2026"], "must_not_include": []}
+  - id: TP1-S-03
+    zone: taepyeong1
+    resident_type: shop_tenant
+    category: B
+    split: dev
+    origin: law
+    question: "가게 하는데 영업보상 받나요?"
+    expected: {"answerable": true, "gold_sources": ["토지보상법 시행규칙 제45조", "토지보상법 시행규칙 제47조"], "must_include": ["영업"], "must_not_include": []}
+  - id: TP1-S-04
+    zone: taepyeong1
+    resident_type: shop_tenant
+    category: B
+    split: test
+    origin: law
+    question: "휴업 보상은 몇 개월치예요?"
+    expected: {"answerable": true, "gold_sources": ["토지보상법 시행규칙 제47조", "도시정비법 시행령 제54조"], "must_include": ["4개월"], "must_not_include": []}
+  - id: TP1-S-05
+    zone: taepyeong1
+    resident_type: shop_tenant
+    category: B
+    split: dev
+    origin: law
+    question: "영업보상 받으려면 뭘 갖춰야 해요?"
+    expected: {"answerable": true, "gold_sources": ["토지보상법 시행규칙 제45조"], "must_include": ["사업자등록|허가|적법"], "must_not_include": []}
+  - id: TP1-S-06
+    zone: taepyeong1
+    resident_type: shop_tenant
+    category: C
+    split: test
+    origin: scenario
+    question: "상가 보증금은 누구한테 돌려받아요?"
+    expected: {"answerable": true, "gold_sources": ["도시정비법 제70조"], "must_include": ["사업시행자"], "must_not_include": []}
+  - id: TP1-S-07
+    zone: taepyeong1
+    resident_type: shop_tenant
+    category: C
+    split: dev
+    origin: scenario
+    question: "무허가 건물에서 장사해도 보상받아요?"
+    expected: {"answerable": true, "gold_sources": ["토지보상법 시행규칙 제45조", "토지보상법 시행규칙 제47조", "토지보상법 시행규칙 제52조"], "must_include": ["사업자등록|1천만"], "must_not_include": []}
+  - id: TP1-S-08
+    zone: taepyeong1
+    resident_type: shop_tenant
+    category: D
+    split: test
+    origin: scenario
+    question: "영업보상 금액은 어떻게 계산해요?"
+    expected: {"answerable": true, "gold_sources": ["토지보상법 시행규칙 제47조", "토지보상법 시행규칙 제46조"], "must_include": ["영업이익"], "must_not_include": []}
+  - id: TP1-S-09
+    zone: taepyeong1
+    resident_type: shop_tenant
+    category: E
+    split: dev
+    origin: scenario
+    question: "옆 가게가 보상 더 받았다는데 이거 불법 아닌가요?"
+    expected: {"answerable": false, "gold_sources": [], "must_include": [], "must_not_include": []}
+  - id: TP1-S-10
+    zone: taepyeong1
+    resident_type: shop_tenant
+    category: E
+    split: test
+    origin: scenario
+    question: "이 동네 상가 권리금 시세가 앞으로 어떻게 될까요?"
+    expected: {"answerable": false, "gold_sources": [], "must_include": [], "must_not_include": []}
+  - id: EG2-S-01
+    zone: eunhaeng1-geumgwang2
+    resident_type: shop_tenant
+    category: A
+    split: dev
+    origin: notice
+    question: "은행1-금광2구역 지금 진행 상황이 어때요?"
+    expected: {"answerable": true, "gold_sources": ["우리 구역 진행 현황"], "must_include": ["정비구역"], "must_not_include": []}
+  - id: EG2-S-02
+    zone: eunhaeng1-geumgwang2
+    resident_type: shop_tenant
+    category: A
+    split: test
+    origin: notice
+    question: "은행1-금광2구역 추진위원회 승인 고시 번호가 뭐예요?"
+    expected: {"answerable": true, "gold_sources": ["성남시 고시 제2026-41호", "우리 구역 진행 현황"], "must_include": ["2026-41"], "must_not_include": []}
+  - id: EG2-S-03
+    zone: eunhaeng1-geumgwang2
+    resident_type: shop_tenant
+    category: B
+    split: dev
+    origin: law
+    question: "식당 하는데 가게 옮기면 보상 있나요?"
+    expected: {"answerable": true, "gold_sources": ["토지보상법 시행규칙 제47조", "토지보상법 시행규칙 제45조"], "must_include": ["영업"], "must_not_include": []}
+  - id: EG2-S-04
+    zone: eunhaeng1-geumgwang2
+    resident_type: shop_tenant
+    category: B
+    split: test
+    origin: law
+    question: "영업보상 대상은 언제를 기준으로 정해요?"
+    expected: {"answerable": true, "gold_sources": ["도시정비법 시행령 제54조"], "must_include": ["공람공고"], "must_not_include": []}
+  - id: EG2-S-05
+    zone: eunhaeng1-geumgwang2
+    resident_type: shop_tenant
+    category: B
+    split: dev
+    origin: law
+    question: "가게 집기 옮기는 비용도 주나요?"
+    expected: {"answerable": true, "gold_sources": ["토지보상법 시행규칙 제55조", "토지보상법 시행규칙 제47조"], "must_include": ["이전"], "must_not_include": []}
+  - id: EG2-S-06
+    zone: eunhaeng1-geumgwang2
+    resident_type: shop_tenant
+    category: C
+    split: test
+    origin: scenario
+    question: "가게 계약기간 남았는데 나가야 해요?"
+    expected: {"answerable": true, "gold_sources": ["도시정비법 제70조", "도시정비법 제81조"], "must_include": ["관리처분"], "must_not_include": []}
+  - id: EG2-S-07
+    zone: eunhaeng1-geumgwang2
+    resident_type: shop_tenant
+    category: C
+    split: dev
+    origin: scenario
+    question: "휴업 기간이 4개월보다 길어질 수도 있어요?"
+    expected: {"answerable": true, "gold_sources": ["토지보상법 시행규칙 제47조", "도시정비법 시행령 제54조"], "must_include": ["2년"], "must_not_include": []}
+  - id: EG2-S-08
+    zone: eunhaeng1-geumgwang2
+    resident_type: shop_tenant
+    category: D
+    split: test
+    origin: scenario
+    question: "장사 접으면 보상이 달라져요?"
+    expected: {"answerable": true, "gold_sources": ["토지보상법 시행규칙 제46조"], "must_include": ["폐업|폐지"], "must_not_include": []}
+  - id: EG2-S-09
+    zone: eunhaeng1-geumgwang2
+    resident_type: shop_tenant
+    category: E
+    split: dev
+    origin: scenario
+    question: "보상금 소송 잘하는 변호사 추천해 주세요"
+    expected: {"answerable": false, "gold_sources": [], "must_include": [], "must_not_include": []}
+  - id: EG2-S-10
+    zone: eunhaeng1-geumgwang2
+    resident_type: shop_tenant
+    category: E
+    split: test
+    origin: scenario
+    question: "지금 상가 사두면 프리미엄 붙을까요?"
+    expected: {"answerable": false, "gold_sources": [], "must_include": [], "must_not_include": []}
+  - id: SJ1-S-01
+    zone: sujin1
+    resident_type: shop_tenant
+    category: A
+    split: dev
+    origin: notice
+    question: "수진1구역 정비구역은 언제 지정됐어요?"
+    expected: {"answerable": true, "gold_sources": ["성남시 고시 제2020-338호", "우리 구역 진행 현황"], "must_include": ["2020"], "must_not_include": []}
+  - id: SJ1-S-02
+    zone: sujin1
+    resident_type: shop_tenant
+    category: A
+    split: test
+    origin: notice
+    question: "수진1구역 관리처분계획 경미한 변경은 언제였어요?"
+    expected: {"answerable": true, "gold_sources": ["성남시 고시 제2026-216호", "우리 구역 진행 현황"], "must_include": ["2026"], "must_not_include": []}
+  - id: SJ1-S-03
+    zone: sujin1
+    resident_type: shop_tenant
+    category: B
+    split: dev
+    origin: law
+    question: "가게를 옮겨야 하면 어떤 보상을 받아요?"
+    expected: {"answerable": true, "gold_sources": ["토지보상법 시행규칙 제47조"], "must_include": ["휴업|영업"], "must_not_include": []}
+  - id: SJ1-S-04
+    zone: sujin1
+    resident_type: shop_tenant
+    category: B
+    split: test
+    origin: law
+    question: "가게 물건 옮기는 비용도 주나요?"
+    expected: {"answerable": true, "gold_sources": ["토지보상법 시행규칙 제55조", "토지보상법 시행규칙 제47조"], "must_include": ["이전"], "must_not_include": []}
+  - id: SJ1-S-05
+    zone: sujin1
+    resident_type: shop_tenant
+    category: B
+    split: dev
+    origin: law
+    question: "영업보상 대상인지 언제 기준으로 정해요?"
+    expected: {"answerable": true, "gold_sources": ["도시정비법 시행령 제54조"], "must_include": ["공람공고"], "must_not_include": []}
+  - id: SJ1-S-06
+    zone: sujin1
+    resident_type: shop_tenant
+    category: C
+    split: test
+    origin: scenario
+    question: "상가 계약기간이 남았는데 나가야 해요?"
+    expected: {"answerable": true, "gold_sources": ["도시정비법 제70조", "도시정비법 제81조"], "must_include": ["관리처분"], "must_not_include": []}
+  - id: SJ1-S-07
+    zone: sujin1
+    resident_type: shop_tenant
+    category: C
+    split: dev
+    origin: scenario
+    question: "상가 세입자도 LH에 의견을 낼 수 있어요?"
+    expected: {"answerable": true, "gold_sources": ["도시정비법 제47조"], "must_include": ["의견"], "must_not_include": []}
+  - id: SJ1-S-08
+    zone: sujin1
+    resident_type: shop_tenant
+    category: D
+    split: test
+    origin: scenario
+    question: "영업보상 금액은 누가 정해요?"
+    expected: {"answerable": true, "gold_sources": ["토지보상법 시행규칙 제47조", "토지보상법 제68조", "토지보상법 제77조"], "must_include": ["평가|감정"], "must_not_include": []}
+  - id: SJ1-S-09
+    zone: sujin1
+    resident_type: shop_tenant
+    category: E
+    split: dev
+    origin: scenario
+    question: "보상금 소송 변호사 추천해 주세요"
+    expected: {"answerable": false, "gold_sources": [], "must_include": [], "must_not_include": []}
+  - id: SJ1-S-10
+    zone: sujin1
+    resident_type: shop_tenant
+    category: E
+    split: test
+    origin: scenario
+    question: "수진1 상가 지금 사면 프리미엄 붙을까요?"
+    expected: {"answerable": false, "gold_sources": [], "must_include": [], "must_not_include": []}
