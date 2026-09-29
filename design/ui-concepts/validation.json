@@ -1,0 +1,66 @@
+{
+  "viewport": {
+    "width": 390,
+    "height": 844
+  },
+  "javascriptErrors": [],
+  "results": [
+    {
+      "concept": "a",
+      "page": "home",
+      "large": true,
+      "noHorizontalOverflow": true
+    },
+    {
+      "concept": "a",
+      "page": "checklist",
+      "large": true,
+      "noHorizontalOverflow": true
+    },
+    {
+      "concept": "a",
+      "navigation": true,
+      "evidencePanel": true,
+      "escapeClose": true,
+      "stagesPanel": true
+    },
+    {
+      "concept": "b",
+      "page": "home",
+      "large": true,
+      "noHorizontalOverflow": true
+    },
+    {
+      "concept": "b",
+      "page": "checklist",
+      "large": true,
+      "noHorizontalOverflow": true
+    },
+    {
+      "concept": "b",
+      "navigation": true,
+      "evidencePanel": true,
+      "escapeClose": true,
+      "stagesPanel": true
+    },
+    {
+      "concept": "c",
+      "page": "home",
+      "large": true,
+      "noHorizontalOverflow": true
+    },
+    {
+      "concept": "c",
+      "page": "checklist",
+      "large": true,
+      "noHorizontalOverflow": true
+    },
+    {
+      "concept": "c",
+      "navigation": true,
+      "evidencePanel": true,
+      "escapeClose": true,
+      "stagesPanel": true
+    }
+  ]
+}
