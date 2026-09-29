@@ -155,3 +155,14 @@ export interface ExplainResult {
 export interface ApiError {
   error: { code: string; message: string };
 }
+
+export interface ReportStats {
+  days: number;
+  period: { first: string | null; last: string | null };
+  by_outcome: { outcome: string; n: number }[];
+  by_topic: { zone_id: string; topic: string; n: number }[];
+  by_resident_type: { resident_type: string; n: number }[];
+  refusals: { reason: string; n: number }[];
+  photos: { doc_type: string | null; n: number }[];
+  latency_ms: { p50: number | null; p95: number | null };
+}

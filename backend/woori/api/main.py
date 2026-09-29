@@ -7,7 +7,7 @@ import time
 from collections import defaultdict, deque
 from typing import Literal
 
-from fastapi import Depends, FastAPI, File, Form, Header, HTTPException, Request, UploadFile
+from fastapi import Depends, FastAPI, File, Form, Header, HTTPException, Query, Request, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse, StreamingResponse
 from pydantic import BaseModel, Field
@@ -240,20 +240,59 @@ def health():
 
 
 @app.get("/v1/admin/stats")
-def stats(x_admin_token: str | None = Header(default=None)):
+def stats(days: int = Query(default=90, ge=1, le=366), x_admin_token: str | None = Header(default=None)):
+    """주민 질문 리포트용 집계. 질문 원문은 저장하지 않으므로 주제, 결과, 거부 사유 숫자만 돌려준다."""
     if not settings.admin_token or x_admin_token != settings.admin_token:
         raise HTTPException(status_code=403, detail="forbidden")
+    since = "created_at >= now() - make_interval(days => %(days)s)"
+    p = {"days": days}
     with connection() as conn:
+        period = conn.execute(
+            f"SELECT min(created_at)::date AS first, max(created_at)::date AS last FROM answer_trace WHERE {since}", p
+        ).fetchone()
         by_outcome = conn.execute(
-            "SELECT outcome, count(*) AS n FROM answer_trace GROUP BY 1 ORDER BY 2 DESC").fetchall()
+            f"SELECT outcome, count(*) AS n FROM answer_trace WHERE endpoint='ask' AND {since} GROUP BY 1 ORDER BY 2 DESC",
+            p,
+        ).fetchall()
+        # 주제는 답변 모델이 붙인다. 규칙으로 바로 거부된 질문은 주제가 없어 빠진다.
         by_topic = conn.execute(
-            "SELECT zone_id, topic, count(*) AS n FROM answer_trace WHERE endpoint='ask' GROUP BY 1,2 ORDER BY 3 DESC LIMIT 20"
+            f"SELECT zone_id, topic, count(*) AS n FROM answer_trace "
+            f"WHERE endpoint='ask' AND topic IS NOT NULL AND {since} GROUP BY 1,2 ORDER BY 3 DESC",
+            p,
+        ).fetchall()
+        by_resident = conn.execute(
+            f"SELECT resident_type, count(*) AS n FROM answer_trace WHERE endpoint='ask' AND {since} "
+            "GROUP BY 1 ORDER BY 2 DESC",
+            p,
+        ).fetchall()
+        refusals = conn.execute(
+            "SELECT CASE outcome WHEN 'refused_policy' THEN coalesce(gate_scores#>>'{policy,rule}', "
+            "gate_scores#>>'{policy,model}', gate_scores#>>'{policy,analyzer}', 'off_topic') "
+            "WHEN 'refused_no_evidence' THEN 'no_evidence' ELSE 'other_zone' END AS reason, count(*) AS n "
+            f"FROM answer_trace WHERE endpoint='ask' AND outcome LIKE 'refused%%' AND {since} GROUP BY 1 ORDER BY 2 DESC",
+            p,
+        ).fetchall()
+        photos = conn.execute(
+            f"SELECT topic AS doc_type, count(*) AS n FROM answer_trace WHERE endpoint='explain' AND {since} "
+            "GROUP BY 1 ORDER BY 2 DESC",
+            p,
         ).fetchall()
         latency = conn.execute(
             "SELECT percentile_cont(0.5) WITHIN GROUP (ORDER BY latency_ms) AS p50, "
-            "percentile_cont(0.95) WITHIN GROUP (ORDER BY latency_ms) AS p95 FROM answer_trace WHERE endpoint='ask'"
+            "percentile_cont(0.95) WITHIN GROUP (ORDER BY latency_ms) AS p95 "
+            f"FROM answer_trace WHERE endpoint='ask' AND outcome='answered' AND {since}",
+            p,
         ).fetchone()
-    return {"by_outcome": by_outcome, "top_topics": by_topic, "latency_ms": latency}
+    return {
+        "days": days,
+        "period": period,
+        "by_outcome": by_outcome,
+        "by_topic": by_topic,
+        "by_resident_type": by_resident,
+        "refusals": refusals,
+        "photos": photos,
+        "latency_ms": latency,
+    }
 
 
 @app.on_event("startup")
