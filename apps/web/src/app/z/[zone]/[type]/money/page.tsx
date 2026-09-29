@@ -16,7 +16,7 @@ export default async function MoneyPage({ params }: PageProps<"/z/[zone]/[type]/
       <TopBar back={{ href: `/z/${zone}/${type}`, label: "내 구역" }} />
       <div className="px-6 pb-2">
         <ZoneContext zoneId={zone} zoneName={z.name} type={type} path="/money" />
-        <h1 className="mt-2 text-[1.5rem] leading-tight font-extrabold tracking-tight">
+        <h1 className="mt-2 text-[1.5rem] leading-tight font-extrabold tracking-tight text-balance">
           언제, 어떤 돈이
           <br />
           <span className="text-accent">오가는지</span> 알려드려요

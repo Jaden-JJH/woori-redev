@@ -14,7 +14,7 @@ export default async function AskPage({ params }: PageProps<"/z/[zone]/[type]/as
       <TopBar back={{ href: `/z/${zone}/${type}`, label: "내 구역" }} />
       <div className="px-6">
         <ZoneContext zoneId={zone} zoneName={t.zone.name} type={type} path="/ask" />
-        <h1 className="mt-2 text-[1.5rem] leading-tight font-extrabold tracking-tight">
+        <h1 className="mt-2 text-[1.5rem] leading-tight font-extrabold tracking-tight text-balance">
           궁금한 걸
           <br />
           <span className="text-accent">쉬운 말</span>로 답해드려요

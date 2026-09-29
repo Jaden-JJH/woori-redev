@@ -8,7 +8,7 @@ import { Icon } from "./Icon";
  * 지금 화면 공유. 휴대폰 기본 공유창(카카오톡, 문자 등)을 먼저 쓰고, 없으면 링크 복사와 문자 보내기를 보여준다.
  * 링크에는 구역과 입장만 들어간다(개인정보 없음).
  */
-export function ShareButton() {
+export function ShareButton({ variant = "bar" }: { variant?: "bar" | "wide" }) {
   const path = usePathname();
   const dialog = useRef<HTMLDialogElement>(null);
   const [copied, setCopied] = useState(false);
@@ -40,14 +40,25 @@ export function ShareButton() {
 
   return (
     <>
-      <button
-        type="button"
-        onClick={share}
-        aria-label="공유하기"
-        className="grid h-12 w-12 place-items-center rounded-xl text-ink"
-      >
-        <Icon name="share" size={22} />
-      </button>
+      {variant === "bar" ? (
+        <button
+          type="button"
+          onClick={share}
+          className="flex h-12 min-w-12 items-center justify-center gap-1 rounded-xl px-2 text-[0.8rem] font-bold text-ink"
+        >
+          <Icon name="share" size={20} />
+          공유
+        </button>
+      ) : (
+        <button
+          type="button"
+          onClick={share}
+          className="press flex min-h-[54px] w-full items-center justify-center gap-2.5 rounded-[15px] border-2 border-accent bg-white text-[1rem] font-bold text-accent"
+        >
+          <Icon name="share" size={21} />
+          가족과 함께 보기
+        </button>
+      )}
       <dialog
         ref={dialog}
         className="sheet"

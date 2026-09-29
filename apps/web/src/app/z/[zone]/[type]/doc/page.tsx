@@ -12,7 +12,7 @@ export default async function DocPage({ params }: PageProps<"/z/[zone]/[type]/do
       <TopBar back={{ href: `/z/${zone}/${type}/ask`, label: "물어보기" }} />
       <div className="px-6">
         <ZoneContext zoneId={zone} zoneName={t.zone.name} type={type} path="/doc" />
-        <h1 className="mt-2 text-[1.5rem] leading-tight font-extrabold tracking-tight">
+        <h1 className="mt-2 text-[1.5rem] leading-tight font-extrabold tracking-tight text-balance">
           받으신 통지서,
           <br />
           <span className="text-accent">같이 읽어</span>드릴게요

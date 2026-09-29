@@ -21,7 +21,7 @@ export default function AboutPage() {
     <main className="flex flex-1 flex-col">
       <TopBar back={{ href: "/", label: "처음으로" }} />
       <div className="px-6">
-        <h1 className="text-[1.5rem] leading-tight font-extrabold tracking-tight">
+        <h1 className="text-[1.5rem] leading-tight font-extrabold tracking-tight text-balance">
           답할 수 있는 것과
           <br />
           <span className="text-accent">답하지 않는 것</span>

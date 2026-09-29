@@ -17,7 +17,9 @@ export function GuideCard({ item, stageLabel }: { item: ChecklistItem; stageLabe
       <div className="flex flex-wrap items-center gap-2 text-[0.83rem] font-bold text-accent">
         <Icon name={kind.icon} size={22} />
         <span>{kind.label}</span>
-        {stageLabel ? <span className="font-semibold text-ink-mute">, {stageLabel}</span> : null}
+        {stageLabel ? (
+          <span className="rounded-md bg-tint-2 px-2 py-0.5 text-[0.75rem] font-semibold text-ink-mute">{stageLabel}</span>
+        ) : null}
       </div>
       <h3 className="mt-2.5 mb-3 text-[1.17rem] leading-snug font-bold tracking-tight text-balance">{item.title}</h3>
       {hl ? (

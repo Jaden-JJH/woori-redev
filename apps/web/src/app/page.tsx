@@ -16,7 +16,7 @@ export default async function Home() {
       <div className="bg-gradient-to-b from-paper from-25% to-peach pb-4">
         <TopBar />
         <div className="px-6">
-          <h1 className="mt-2 text-[1.67rem] leading-tight font-extrabold tracking-tight">
+          <h1 className="mt-2 text-[1.67rem] leading-tight font-extrabold tracking-tight text-balance">
             어느 동네가
             <br />
             <span className="text-accent">궁금하세요?</span>

@@ -1,4 +1,5 @@
 import { GuideCard } from "@/components/GuideCard";
+import { ShareButton } from "@/components/ShareButton";
 import { TopBar } from "@/components/TopBar";
 import { ZoneContext } from "@/components/ZoneContext";
 import { Footnote } from "@/components/ui";
@@ -22,7 +23,7 @@ export default async function ChecklistPage({ params }: PageProps<"/z/[zone]/[ty
       <TopBar back={{ href: `/z/${zone}/${type}`, label: "내 구역" }} />
       <div className="px-6 pb-1.5">
         <ZoneContext zoneId={zone} zoneName={z.name} type={type} path="/checklist" />
-        <h1 className="mt-2 mb-4 text-[1.5rem] leading-tight font-extrabold tracking-tight">
+        <h1 className="mt-2 mb-4 text-[1.5rem] leading-tight font-extrabold tracking-tight text-balance">
           {stageShort(z.current_stage.name)}에 챙길 일
         </h1>
       </div>
@@ -47,7 +48,9 @@ export default async function ChecklistPage({ params }: PageProps<"/z/[zone]/[ty
           ))}
         </section>
       ) : null}
-      <div className="mt-4" />
+      <div className="px-5 pt-6 pb-2">
+        <ShareButton variant="wide" />
+      </div>
       <Footnote asOf={formatDate(z.as_of)} />
     </main>
   );

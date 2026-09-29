@@ -19,7 +19,7 @@ export default async function ZoneTypePage({ params }: PageProps<"/z/[zone]">) {
           <Icon name="pin" size={16} />
           {t.zone.name}, {stageShort(t.zone.current_stage.name)}
         </Pill>
-        <h1 className="mt-4 text-[1.6rem] leading-tight font-extrabold tracking-tight">
+        <h1 className="mt-4 text-[1.6rem] leading-tight font-extrabold tracking-tight text-balance">
           {t.zone.name}에서
           <br />
           <span className="text-accent">어떤 입장</span>이세요?
