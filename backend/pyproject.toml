@@ -40,8 +40,13 @@ build-backend = "hatchling.build"
 packages = ["woori"]
 
 [tool.ruff]
-line-length = 110
+line-length = 120
 target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "RUF"]
+# B008: FastAPI 의 File(), Form() 기본값 관용구. RUF001~003: 한국어 문장부호.
+ignore = ["B008", "RUF001", "RUF002", "RUF003", "E501"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

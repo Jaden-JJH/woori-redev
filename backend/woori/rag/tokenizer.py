@@ -4,6 +4,7 @@
 """
 
 from functools import lru_cache
+from itertools import pairwise
 
 from kiwipiepy import Kiwi
 
@@ -40,7 +41,7 @@ def tokenize(text: str) -> list[str]:
 
     def flush() -> None:
         # 인접한 두 체언만 붙인다(분양+신청 -> 분양신청). 긴 연쇄 전체를 붙이면 질의와 문서의 복합어가 어긋난다.
-        for a, b in zip(run, run[1:]):
+        for a, b in pairwise(run):
             out.append(a + b)
         run.clear()
 

@@ -1,0 +1,69 @@
+@import "tailwindcss";
+
+/* 디자인 토큰: 예선 프로토타입 v0.1 기준. 고령자 가독성을 위해 본문 18px, 큰 글씨 모드 21px. */
+@theme {
+  --color-navy-900: #15284f;
+  --color-navy-800: #1f3a6e;
+  --color-navy-700: #2b4c8c;
+  --color-navy-100: #dfe7f5;
+  --color-navy-50: #eef3fb;
+  --color-amber-accent: #ffb13b;
+  --color-orange-accent: #f26b3a;
+  --color-cream: #fff5e6;
+  --color-cream-border: #ffd79a;
+  --color-ink: #1b2233;
+  --color-ink-soft: #4a5468;
+  --color-ink-mute: #8a93a6;
+  --color-paper: #f3f5f9;
+  --color-ok: #1f7a4d;
+  --color-ok-bg: #e6f4ec;
+  --font-sans: "Pretendard Variable", Pretendard, -apple-system, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+}
+
+:root {
+  color-scheme: light;
+  font-size: 18px;
+}
+
+:root[data-font="large"] {
+  font-size: 21px;
+}
+
+html,
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+  -webkit-text-size-adjust: 100%;
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-amber-accent);
+  outline-offset: 2px;
+}
+
+.tap {
+  min-height: 48px;
+}
+
+@keyframes pulse-soft {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.45;
+  }
+}
+
+.pulse-soft {
+  animation: pulse-soft 1.4s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pulse-soft {
+    animation: none;
+  }
+}

@@ -28,7 +28,7 @@ def _compiled() -> list[tuple[str, re.Pattern]]:
         cat = cats.get(key)
         if cat is None:
             continue
-        out.extend((key, re.compile(p, re.I)) for p in cat.patterns)
+        out.extend((key, re.compile(p, re.IGNORECASE)) for p in cat.patterns)
     return out
 
 

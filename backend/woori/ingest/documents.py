@@ -30,7 +30,7 @@ def extract_hwpx(data: bytes) -> str:
         lines: list[str] = []
         for name in sections:
             xml = z.read(name).decode("utf-8")
-            for para in re.findall(r"<hp:p\b.*?</hp:p>", xml, re.S):
+            for para in re.findall(r"<hp:p\b.*?</hp:p>", xml, re.DOTALL):
                 text = "".join(re.findall(r"<hp:t>([^<]*)</hp:t>", para))
                 if text.strip():
                     lines.append(_unescape_xml(text))

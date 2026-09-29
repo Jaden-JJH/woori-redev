@@ -167,8 +167,7 @@ async def ask(body: AskBody, accept: str | None = Header(default=None)):
                 res = await asyncio.to_thread(pipeline.ask, body.zone_id, body.resident_type, body.question, emit)
                 await queue.put(("result", res))
             except InputError as e:
-                status, message = ERROR_MESSAGES[str(e)]
-                await queue.put(("error", {"code": str(e), "message": message}))
+                await queue.put(("error", {"code": str(e), "message": ERROR_MESSAGES[str(e)][1]}))
             except Exception:
                 log.exception("ask failed")
                 await queue.put(("error", {"code": "LLM_UNAVAILABLE", "message": ERROR_MESSAGES["LLM_UNAVAILABLE"][1]}))

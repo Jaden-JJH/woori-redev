@@ -94,7 +94,7 @@ def validate(c: Content) -> list[str]:
         if rtype not in c.checklists:
             errors.append(f"체크리스트 없음: {rtype}")
     seen: set[str] = set()
-    for rtype, items in c.checklists.items():
+    for items in c.checklists.values():
         for i in items:
             if i.id in seen:
                 errors.append(f"체크리스트 id 중복: {i.id}")

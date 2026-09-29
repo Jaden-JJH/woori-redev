@@ -140,7 +140,7 @@ class Retriever:
         zone_notices = [h for h in ranked if h.chunk.source_type == "notice"][:2]
         for h in zone_notices:
             if h not in hits:
-                hits = hits[:-1] + [h]
+                hits = [*hits[:-1], h]
         for h in hits:
             h.coverage = self.index.coverage(q_tokens, h.chunk.id)
 

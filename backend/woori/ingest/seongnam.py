@@ -66,12 +66,12 @@ class Detail:
 
 
 def _strip_tags(fragment: str) -> str:
-    fragment = re.sub(r"<br\s*/?>", "\n", fragment, flags=re.I)
+    fragment = re.sub(r"<br\s*/?>", "\n", fragment, flags=re.IGNORECASE)
     return html.unescape(re.sub(r"<[^>]+>", " ", fragment))
 
 
 def _cell(row_html: str, label: str) -> str:
-    m = re.search(rf'<strong class="mobile-tit">{label}</strong>(.*?)</td>', row_html, re.S)
+    m = re.search(rf'<strong class="mobile-tit">{label}</strong>(.*?)</td>', row_html, re.DOTALL)
     return clean(_strip_tags(m.group(1))) if m else ""
 
 
@@ -81,7 +81,7 @@ def parse_list(page_html: str) -> list[ListRow]:
         return []
     table = page_html[start : page_html.find("</table>", start)]
     rows: list[ListRow] = []
-    for tr in re.findall(r"<tr>.*?</tr>", table, re.S):
+    for tr in re.findall(r"<tr>.*?</tr>", table, re.DOTALL):
         vid = re.search(r"f_view\('(\d+)'\)", tr)
         if not vid:
             continue
@@ -102,7 +102,7 @@ def parse_list(page_html: str) -> list[ListRow]:
 
 
 def _dd(page_html: str, label: str) -> str:
-    m = re.search(rf"<dt>\s*{label}\s*</dt>\s*<dd[^>]*>(.*?)</dd>", page_html, re.S)
+    m = re.search(rf"<dt>\s*{label}\s*</dt>\s*<dd[^>]*>(.*?)</dd>", page_html, re.DOTALL)
     return clean(_strip_tags(m.group(1))) if m else ""
 
 
@@ -110,7 +110,7 @@ _ATTACH_RE = re.compile(r"goDownLoad\(event,\s*'([^']*)',\s*'([^']*)',\s*'([^']*
 
 
 def parse_detail(board_id: str, page_html: str) -> Detail:
-    body_m = re.search(r'<div class="board-view-content">\s*<div[^>]*>(.*?)</div>', page_html, re.S)
+    body_m = re.search(r'<div class="board-view-content">\s*<div[^>]*>(.*?)</div>', page_html, re.DOTALL)
     body = clean(_strip_tags(body_m.group(1))) if body_m else ""
     attachments = [Attachment(*m) for m in _ATTACH_RE.findall(page_html)]
     notice_no = normalize_notice_no(_dd(page_html, "고시공고번호")) or ""
