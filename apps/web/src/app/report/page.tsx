@@ -6,7 +6,7 @@ import { TopBar } from "@/components/TopBar";
 import { api, reportStats } from "@/lib/api";
 import type { ReportStats } from "@/lib/types";
 
-// 운영자용 화면이라 검색에 노출하지 않고, 서비스 안에서 링크하지 않는다.
+// 성남시 제공용 리포트. 검색에는 노출하지 않고, 서비스 안내 페이지에서만 링크한다.
 export const metadata: Metadata = {
   title: "주민 질문 리포트 | 우리동네 재개발 비서",
   robots: { index: false, follow: false },

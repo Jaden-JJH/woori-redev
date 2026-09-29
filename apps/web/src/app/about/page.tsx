@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Icon, IconBox, type IconName } from "@/components/Icon";
 import { TopBar } from "@/components/TopBar";
 import type { ReactNode } from "react";
@@ -62,6 +63,13 @@ export default function AboutPage() {
             <li>질문과 사진은 답변을 만들기 위해 AI 서비스(Anthropic, Google)로 전달돼요.</li>
             <li>글씨 크기와 마지막으로 본 구역은 이 휴대폰에만 저장돼요.</li>
           </ul>
+          <Link
+            href="/report"
+            className="tap mt-3 inline-flex items-center gap-1.5 font-bold text-accent underline underline-offset-4"
+          >
+            주민들이 많이 물은 주제 보기
+            <Icon name="arrow" size={16} />
+          </Link>
         </Block>
         <p className="flex items-center justify-center gap-1.5 py-2 text-[0.8rem] text-ink-mute">
           <Icon name="home" size={16} /> 우리동네 재개발 비서, 팀 Trust
