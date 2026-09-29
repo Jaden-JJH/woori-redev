@@ -68,3 +68,7 @@ SVG 그림은 450ms 동안 부드럽게 등장합니다. C의 현재 위치는 �
 - https://wwit.design/2023/04/04/heydealer/ : 사용자 제공 UI 참고 자료입니다.
 
 서비스 로고, 이미지, 고유 화면을 복제하지 않았습니다. 별도 프론트엔드 라이브러리나 제품 의존성을 추가하지 않았습니다. frontend-design 및 dataviz 스킬은 현재 설치 경로에서 찾지 못해 사용하지 않았습니다.
+
+## 후속 조합 시안: A 구성 + B 색상
+
+사용자 요청에 따라 a-peach.html에 A의 레이아웃과 동네 SVG를 보존하고 B의 살구색, 테라코타 색상을 적용했습니다. 기본 화면은 내 구역과 챙길 일을 나란히 보여줍니다. a-peach-comparison.png와 a-peach-home.png, a-peach-checklist.png에서 확인할 수 있습니다. 큰 글씨 캡처는 large 접미사입니다. 기존 A, B, C 비교 시안은 보존했습니다.
