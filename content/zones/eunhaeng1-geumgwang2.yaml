@@ -1,0 +1,31 @@
+id: eunhaeng1-geumgwang2
+name: 은행1-금광2구역
+district: 중원구
+location: 성남시 중원구 은행동 1947번지 일대
+# 고시 원문은 두 구역명을 가운뎃점으로 잇는다. 태거는 가운뎃점류 구분자를 '-'로 정규화한 뒤 별칭과 비교한다.
+aliases: ["은행1-금광2구역", "은행1-금광2", "은행1금광2", "은행1구역", "은행1", "금광2구역", "금광2"]
+impl_type: union
+developer: null
+track: living_union
+current_stage: ZONE_DESIGNATION
+summary: >
+  은행1구역과 금광2구역은 하나의 추진위원회로 묶인 생활권 재개발 구역이에요.
+  2026년 2월 조합설립추진위원회가 승인됐고, 지금은 정비구역 지정을 준비하는 단계예요.
+  2026년 6월 주민설명회에서 추정분담금이 처음 공개됐어요.
+as_of: 2026-09-29
+events:
+  - stage: BASIC_PLAN
+    status: done
+    title: 2030 성남시 도시 및 주거환경정비기본계획(생활권 계획) 대상지
+    source_note: 2030 성남시 도시 및 주거환경정비기본계획
+  - stage: CPC_APPROVAL
+    status: done
+    date: 2026-02-16
+    title: 조합설립추진위원회 구성 승인
+    notice_no: 성남시 고시 제2026-41호
+  - stage: ZONE_DESIGNATION
+    status: current
+    date: 2026-06-18
+    title: 주민설명회에서 추정분담금 첫 공개
+    plain_desc: 정비계획을 준비하면서 주민설명회에서 추정분담금을 처음 알렸어요. 추정분담금은 확정 금액이 아니에요.
+    source_note: 태평1, 은행1-금광2 주민설명회 보도(뉴스1, 글로벌이코노믹, 2026.6.18)

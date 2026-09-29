@@ -1,0 +1,196 @@
+# 집주인(토지등소유자) 체크리스트
+# stages: 이 항목을 "지금 할 일"로 보여줄 단계. 이후 단계 항목은 "다가오는 일"로 보여준다.
+# impl_types: union(조합 시행), public(공공 시행)
+# 모든 문장은 legal_basis 조문의 현행 원문(국가법령정보, 2026.9 수집)과 대조했다.
+
+resident_type: owner
+items:
+  - id: owner.levy_estimate_not_final
+    impl_types: [union, public]
+    stages: [CPC_APPROVAL, ZONE_DESIGNATION, UNION_APPROVAL, DEVELOPER_DESIGNATION, RESIDENT_COUNCIL, PROJECT_APPROVAL]
+    kind: caution
+    is_money: true
+    title: 추정분담금은 확정 금액이 아니에요
+    plain_body: >
+      정비계획에는 토지등소유자 유형별 분담금 추산액과 그 계산 근거를 넣어야 해서, 사업 초기에 추정분담금을 알려줘요.
+      하지만 실제로 내거나 돌려받을 금액은 관리처분계획을 세울 때 종전 재산 감정평가와 정비사업비를 반영해 정해져요.
+      추정 금액만 보고 집을 담보로 큰 돈을 빌리는 결정은 서두르지 마세요.
+    legal_basis: 도시정비법 제9조제1항제2호의2, 제74조제1항제6호
+    law_ref: 도시정비법 제74조
+    sort_order: 10
+
+  - id: owner.zone_plan_public_review
+    impl_types: [union, public]
+    stages: [CPC_APPROVAL, ZONE_DESIGNATION]
+    kind: todo
+    is_money: false
+    title: 정비계획 공람 기간에 의견을 낼 수 있어요
+    plain_body: >
+      시는 정비계획을 정하기 전에 주민에게 서면으로 알리고, 주민설명회를 열고, 30일 이상 계획을 공개해야 해요(공람).
+      공람 기간 안에 분담금 추산액, 건물 배치, 세입자 대책 같은 계획에 서면으로 의견을 낼 수 있고,
+      시는 의견을 받아들이지 않으면 그 이유를 알려줘야 해요.
+    conditions: 공람의 요지와 장소는 성남시 공보와 고시공고로 알려요.
+    legal_basis: 도시정비법 제15조제1항, 도시정비법 시행령 제13조제2항, 제3항
+    law_ref: 도시정비법 제15조
+    sort_order: 20
+
+  - id: owner.cpc_consent_counts_for_union
+    impl_types: [union]
+    stages: [CPC_APPROVAL, ZONE_DESIGNATION, UNION_APPROVAL]
+    kind: caution
+    is_money: false
+    title: 추진위원회에 동의했다면 조합설립에도 동의한 것으로 봐요
+    plain_body: >
+      추진위원회 구성에 동의한 토지등소유자는 조합설립에도 동의한 것으로 봐요.
+      조합설립에 반대하려면 조합설립인가를 신청하기 전에 성남시와 추진위원회에 반대 의사를 표시해야 해요.
+    legal_basis: 도시정비법 제31조제3항
+    law_ref: 도시정비법 제31조
+    sort_order: 25
+
+  - id: owner.union_consent
+    impl_types: [union]
+    stages: [CPC_APPROVAL, ZONE_DESIGNATION, UNION_APPROVAL]
+    kind: todo
+    is_money: true
+    title: 조합설립 동의 전에 내 분담금 추산액을 확인하세요
+    plain_body: >
+      재개발조합은 정비구역 지정 고시 뒤에 토지등소유자 4분의 3 이상과 토지면적 2분의 1 이상의 동의를 받아야 만들어져요.
+      동의를 받기 전에 토지등소유자별 분담금 추산액과 산출 근거를 알려줘야 하니, 동의서에 적힌 정비사업비와 분담 기준을 꼭 읽어 보세요.
+    legal_basis: 도시정비법 제35조제2항, 도시정비법 시행령 제32조
+    law_ref: 도시정비법 제35조
+    sort_order: 30
+
+  - id: owner.public_resident_council
+    impl_types: [public]
+    stages: [DEVELOPER_DESIGNATION, RESIDENT_COUNCIL, PROJECT_APPROVAL, SALE_APPLICATION, MGMT_DISPOSAL, RELOCATION]
+    kind: todo
+    is_money: false
+    title: 주민대표회의가 주민 의견을 전달해요
+    plain_body: >
+      공공기관이 사업시행자인 구역에는 조합이 없어요. 대신 토지등소유자 과반수 동의로 만든 주민대표회의가
+      철거, 이주, 보상, 정비사업비 부담 같은 시행규정에 의견을 내요. 궁금한 점은 주민대표회의나 사업시행자에게 물어보세요.
+    legal_basis: 도시정비법 제47조제3항, 제5항
+    law_ref: 도시정비법 제47조
+    sort_order: 35
+
+  - id: owner.sale_application_deadline
+    impl_types: [union, public]
+    stages: [PROJECT_APPROVAL, SALE_APPLICATION]
+    kind: deadline
+    is_money: true
+    title: 분양신청 기간을 꼭 지키세요
+    plain_body: >
+      사업시행계획 인가 고시가 나면 사업시행자는 90일 안에(한 번에 한해 30일 연장 가능) 분양신청 안내를 보내요.
+      안내에는 내 종전 재산 가격과 분담금 추산액, 신청 기간이 들어 있어요. 신청 기간은 안내를 받은 날부터
+      30일 이상 60일 이내이고, 한 번에 한해 20일까지 늘어날 수 있어요. 새 아파트를 받으려면 이 기간에 꼭 신청하세요.
+    legal_basis: 도시정비법 제72조제1항, 제2항
+    law_ref: 도시정비법 제72조
+    sort_order: 40
+
+  - id: owner.cash_settlement_warning
+    impl_types: [union, public]
+    stages: [PROJECT_APPROVAL, SALE_APPLICATION, MGMT_DISPOSAL]
+    kind: caution
+    is_money: true
+    title: 분양신청을 하지 않으면 현금청산 대상이 돼요
+    plain_body: >
+      분양신청을 하지 않거나 기간이 끝나기 전에 철회하면 새 아파트 대신 돈으로 보상받는 현금청산 대상이 돼요.
+      사업시행자는 관리처분계획 인가 고시 다음 날부터 90일 안에 손실보상 협의를 해야 하고,
+      협의가 안 되면 그 뒤 60일 안에 수용재결을 신청하거나 매도청구소송을 내야 해요.
+    legal_basis: 도시정비법 제73조제1항, 제2항
+    law_ref: 도시정비법 제73조
+    sort_order: 50
+
+  - id: owner.mgmt_plan_review
+    impl_types: [union, public]
+    stages: [SALE_APPLICATION, MGMT_DISPOSAL]
+    kind: todo
+    is_money: true
+    title: 관리처분계획 공람 때 내 분담금을 확인하세요
+    plain_body: >
+      관리처분계획은 인가를 신청하기 전에 30일 이상 토지등소유자에게 공람하고 의견을 들어야 해요.
+      분양신청 때 받은 분담금 추산액과 비교해 보고, 이상하면 공람 기간에 의견을 내세요.
+    legal_basis: 도시정비법 제78조제1항
+    law_ref: 도시정비법 제78조
+    sort_order: 60
+
+  - id: owner.mgmt_plan_verification
+    impl_types: [union, public]
+    stages: [SALE_APPLICATION, MGMT_DISPOSAL]
+    kind: todo
+    is_money: true
+    title: 분담금이 크게 늘면 공공기관 검증을 받아요
+    plain_body: >
+      조합원 분담규모가 분양신청 때 알린 추산액 총액보다 크게 늘거나(20% 이상으로 대통령령이 정한 비율 이상),
+      정비사업비가 크게 늘거나, 조합원 5분의 1 이상이 인가 신청 뒤 15일 안에 요청하면
+      시는 공공기관에 관리처분계획이 타당한지 검증을 맡겨야 해요.
+    legal_basis: 도시정비법 제78조제3항
+    law_ref: 도시정비법 제78조
+    sort_order: 65
+
+  - id: owner.use_suspension
+    impl_types: [union, public]
+    stages: [MGMT_DISPOSAL, RELOCATION]
+    kind: caution
+    is_money: false
+    title: 관리처분 인가 뒤에는 집을 원칙적으로 쓸 수 없어요
+    plain_body: >
+      관리처분계획 인가 고시가 나면 소유자, 세입자 모두 이전고시가 있을 때까지 종전 집과 땅을 쓰거나
+      세를 줄 수 없어요. 다만 사업시행자가 동의했거나 손실보상이 끝나지 않은 경우는 예외예요.
+    legal_basis: 도시정비법 제81조제1항
+    law_ref: 도시정비법 제81조
+    sort_order: 70
+
+  - id: owner.moving_cost
+    impl_types: [union, public]
+    stages: [MGMT_DISPOSAL, RELOCATION]
+    kind: benefit
+    is_money: true
+    title: 이사비를 받을 수 있어요
+    plain_body: >
+      구역 밖으로 이사하거나 사업시행자가 정한 구역 안 장소로 이사하는 거주자는
+      법에서 정한 기준에 따라 가재도구를 옮기는 이사비를 보상받을 수 있어요.
+    conditions: 이사비를 받은 뒤 같은 구역 안의 다른 곳으로 이사하면 이사비를 받지 못해요.
+    legal_basis: 토지보상법 시행규칙 제55조제2항, 제3항
+    law_ref: 토지보상법 시행규칙 제55조
+    sort_order: 80
+
+  - id: owner.relocation_allowance_cash
+    impl_types: [union, public]
+    stages: [MGMT_DISPOSAL, RELOCATION]
+    kind: benefit
+    is_money: true
+    title: 직접 살던 집이 보상 대상이면 주거이전비를 확인하세요
+    plain_body: >
+      주거용 건물을 보상받는 소유자가 그 집에 실제로 살고 있었다면 가구원 수에 따라 2개월분의 주거이전비를 받을 수 있어요.
+      실제로 살지 않았거나 무허가건축물이면 받지 못해요. 새 아파트를 분양받는 경우처럼 대상이 아닐 수 있는 경우가 있으니
+      사업시행자에게 꼭 확인하세요.
+    conditions: 정비사업에서 주거이전비 보상 대상자를 정하는 기준 시점은 정비계획 공람공고일이에요.
+    legal_basis: 토지보상법 시행규칙 제54조제1항, 도시정비법 시행령 제54조제4항
+    law_ref: 토지보상법 시행규칙 제54조
+    sort_order: 85
+
+  - id: owner.title_transfer
+    impl_types: [union, public]
+    stages: [COMPLETION, TRANSFER]
+    kind: todo
+    is_money: false
+    title: 이전고시 다음 날 새 집의 주인이 돼요
+    plain_body: >
+      공사가 끝나고 이전고시가 나면, 분양받은 사람은 고시 다음 날 새 아파트와 땅의 소유권을 가져요.
+    legal_basis: 도시정비법 제86조제2항
+    law_ref: 도시정비법 제86조
+    sort_order: 90
+
+  - id: owner.settlement
+    impl_types: [union, public]
+    stages: [TRANSFER, SETTLEMENT]
+    kind: deadline
+    is_money: true
+    title: 청산금을 내거나 돌려받아요
+    plain_body: >
+      이전고시 뒤에는 종전 재산 가격과 새로 받은 집 가격의 차이만큼 청산금을 내거나 돌려받아요.
+      정관이나 총회 의결로 정했다면 관리처분계획 인가 뒤부터 나눠서 내거나 받을 수도 있어요.
+    legal_basis: 도시정비법 제89조제1항, 제2항
+    law_ref: 도시정비법 제89조
+    sort_order: 100

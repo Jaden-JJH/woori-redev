@@ -1,0 +1,64 @@
+id: sujin1
+name: 수진1구역
+district: 수정구
+location: 성남시 수정구 수정남로 60번길 29-1(수진동 963번지) 일원, 261,831.4㎡
+aliases: ["수진1구역", "수진1", "수진 1구역", "수진제1구역"]
+impl_type: public
+developer: 한국토지주택공사(LH)
+track: public
+current_stage: RELOCATION
+summary: >
+  한국토지주택공사(LH)가 사업시행자인 공공 재개발 구역이에요. 조합 대신 주민대표회의가 주민을 대표해요.
+  2026년 6월 15일 관리처분계획이 인가돼 지금은 이주 단계예요.
+  계획 세대는 5,060세대(토지등소유자 분양 2,733, 일반분양 1,418, 임대 882, 보류시설 27)예요.
+as_of: 2026-09-29
+events:
+  - stage: BASIC_PLAN
+    status: done
+    title: 성남시 도시 및 주거환경정비기본계획 대상지
+    source_note: 성남시 도시 및 주거환경정비기본계획
+  - stage: ZONE_DESIGNATION
+    status: done
+    date: 2020-12-31
+    title: 정비구역 지정
+    notice_no: 성남시 고시 제2020-338호
+  - stage: ZONE_DESIGNATION
+    status: done
+    date: 2026-04-06
+    title: 정비계획, 정비구역 경미한 변경
+    notice_no: 성남시 고시 제2026-80호
+  - stage: DEVELOPER_DESIGNATION
+    status: done
+    title: 한국토지주택공사(LH) 사업시행자
+    notice_no: 성남시 고시 제2026-216호
+  - stage: RESIDENT_COUNCIL
+    status: done
+    title: 주민대표회의 구성
+    plain_desc: 철거 시기 등을 사업시행자와 협의하는 주민대표회의가 있어요.
+    notice_no: 성남시 고시 제2026-216호
+  - stage: PROJECT_APPROVAL
+    status: done
+    title: 사업시행계획 인가
+    plain_desc: 관리처분계획은 사업시행계획 인가와 분양신청을 거친 뒤에만 세울 수 있어서, 이 단계는 이미 끝났어요.
+    source_note: 도시정비법 제72조, 제74조제1항 (관리처분계획 인가 고시 제2026-130호로 선행 절차 완료)
+  - stage: SALE_APPLICATION
+    status: done
+    title: 분양신청 종료
+    plain_desc: 분양신청 기간이 끝나야 관리처분계획을 세울 수 있어서, 분양신청은 이미 끝났어요.
+    source_note: 도시정비법 제74조제1항 (관리처분계획 인가 고시 제2026-130호로 선행 절차 완료)
+  - stage: MGMT_DISPOSAL
+    status: done
+    date: 2026-06-15
+    title: 관리처분계획 인가
+    notice_no: 성남시 고시 제2026-130호
+  - stage: MGMT_DISPOSAL
+    status: done
+    date: 2026-09-02
+    title: 관리처분계획 경미한 변경 인가
+    plain_desc: 분양설계는 바뀌지 않고 권리, 의무 변동만 반영한 변경이에요.
+    notice_no: 성남시 고시 제2026-216호
+  - stage: RELOCATION
+    status: current
+    title: 이주 단계
+    plain_desc: 관리처분계획 인가 고시 뒤에는 종전 집을 원칙적으로 쓸 수 없어요. 철거 시기는 사업시행자와 주민대표회의가 협의해 정해요.
+    notice_no: 성남시 고시 제2026-216호

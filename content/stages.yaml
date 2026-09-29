@@ -1,0 +1,89 @@
+# 정비사업 법정 절차 단계 마스터
+# track: 구역의 사업 방식에 따라 단계 순서가 다르다.
+#   living_union : 성남 생활권 재개발 (추진위 승인 후 정비구역 지정, 조합 시행)
+#   public       : 공공 시행 (한국토지주택공사 등이 사업시행자로 지정, 주민대표회의 구성)
+
+stages:
+  BASIC_PLAN:
+    name: 기본계획 수립
+    plain_desc: 성남시가 10년 단위로 어느 동네를 어떻게 정비할지 큰 그림을 정하는 단계예요.
+    legal_ref: 도시정비법 제4조
+  CPC_APPROVAL:
+    name: 추진위원회 승인
+    plain_desc: 토지등소유자 과반수가 동의해 조합을 만들 준비 모임(추진위원회)을 꾸리고 시의 승인을 받는 단계예요.
+    legal_ref: 도시정비법 제31조
+  ZONE_DESIGNATION:
+    name: 정비구역 지정
+    plain_desc: 정비계획을 만들어 주민설명회와 공람을 거친 뒤, 시가 구역의 경계와 건축 계획을 확정해 고시하는 단계예요.
+    legal_ref: 도시정비법 제8조, 제15조, 제16조
+  UNION_APPROVAL:
+    name: 조합설립 인가
+    plain_desc: 토지등소유자 4분의 3 이상과 토지면적 2분의 1 이상의 동의를 모아 재개발조합을 설립하는 단계예요.
+    legal_ref: 도시정비법 제35조
+  DEVELOPER_DESIGNATION:
+    name: 사업시행자 지정
+    plain_desc: 조합 대신 한국토지주택공사(LH) 같은 공공기관이 사업을 맡도록 시가 지정하는 단계예요.
+    legal_ref: 도시정비법 제26조
+  RESIDENT_COUNCIL:
+    name: 주민대표회의 구성
+    plain_desc: 공공이 사업을 맡을 때, 토지등소유자를 대표해 사업시행자와 협의하는 주민 모임을 만드는 단계예요.
+    legal_ref: 도시정비법 제47조
+  CONTRACTOR:
+    name: 시공자 선정
+    plain_desc: 실제로 아파트를 지을 건설회사를 고르는 단계예요.
+    legal_ref: 도시정비법 제29조
+  PROJECT_APPROVAL:
+    name: 사업시행계획 인가
+    plain_desc: 건물 배치, 세대 수, 세입자 대책 등 사업의 구체적인 계획을 시가 인가하는 단계예요. 이 고시가 나면 분양신청 절차가 시작돼요.
+    legal_ref: 도시정비법 제50조
+  SALE_APPLICATION:
+    name: 분양공고, 분양신청
+    plain_desc: 새 아파트를 받을지 신청하는 단계예요. 기간 안에 신청하지 않으면 현금청산 대상이 될 수 있어요.
+    legal_ref: 도시정비법 제72조, 제73조
+  MGMT_DISPOSAL:
+    name: 관리처분계획 인가
+    plain_desc: 누가 어떤 집을 받고 얼마를 더 내거나 돌려받는지(분담금) 확정하는 단계예요.
+    legal_ref: 도시정비법 제74조, 제78조
+  RELOCATION:
+    name: 이주, 철거, 착공
+    plain_desc: 관리처분계획 인가 뒤 주민이 이사를 나가고, 기존 건물을 철거한 뒤 공사를 시작하는 단계예요.
+    legal_ref: 도시정비법 제81조
+  COMPLETION:
+    name: 준공 인가
+    plain_desc: 공사가 끝나 시가 준공을 확인하고 입주가 시작되는 단계예요.
+    legal_ref: 도시정비법 제83조
+  TRANSFER:
+    name: 이전고시
+    plain_desc: 새 아파트와 땅의 소유권을 분양받은 사람에게 넘긴다고 고시하는 단계예요. 고시 다음 날 소유권을 가져요.
+    legal_ref: 도시정비법 제86조
+  SETTLEMENT:
+    name: 청산, 해산
+    plain_desc: 종전 재산과 새 재산의 가격 차이(청산금)를 주고받고 사업을 마무리하는 단계예요.
+    legal_ref: 도시정비법 제89조
+
+tracks:
+  living_union:
+    - BASIC_PLAN
+    - CPC_APPROVAL
+    - ZONE_DESIGNATION
+    - UNION_APPROVAL
+    - CONTRACTOR
+    - PROJECT_APPROVAL
+    - SALE_APPLICATION
+    - MGMT_DISPOSAL
+    - RELOCATION
+    - COMPLETION
+    - TRANSFER
+    - SETTLEMENT
+  public:
+    - BASIC_PLAN
+    - ZONE_DESIGNATION
+    - DEVELOPER_DESIGNATION
+    - RESIDENT_COUNCIL
+    - PROJECT_APPROVAL
+    - SALE_APPLICATION
+    - MGMT_DISPOSAL
+    - RELOCATION
+    - COMPLETION
+    - TRANSFER
+    - SETTLEMENT

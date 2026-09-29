@@ -1,0 +1,112 @@
+# 세입자(주거) 체크리스트
+# 모든 문장은 legal_basis 조문의 현행 원문(국가법령정보, 2026.9 수집)과 대조했다.
+
+resident_type: tenant
+items:
+  - id: tenant.keep_residence_proof
+    impl_types: [union, public]
+    stages: [CPC_APPROVAL, ZONE_DESIGNATION, UNION_APPROVAL, DEVELOPER_DESIGNATION, RESIDENT_COUNCIL, PROJECT_APPROVAL, SALE_APPLICATION, MGMT_DISPOSAL]
+    kind: todo
+    is_money: true
+    title: 전입신고와 임대차계약서를 챙겨 두세요
+    plain_body: >
+      세입자의 주거이전비와 임대주택 입주 자격은 언제부터 이 구역에 살았는지로 정해져요.
+      전입신고를 해 두고, 임대차계약서와 월세, 공과금 영수증처럼 거주를 증명할 자료를 버리지 말고 보관하세요.
+    legal_basis: 토지보상법 시행규칙 제54조제2항, 제3항
+    law_ref: 토지보상법 시행규칙 제54조
+    sort_order: 10
+
+  - id: tenant.relocation_allowance
+    impl_types: [union, public]
+    stages: [ZONE_DESIGNATION, UNION_APPROVAL, DEVELOPER_DESIGNATION, RESIDENT_COUNCIL, PROJECT_APPROVAL, SALE_APPLICATION, MGMT_DISPOSAL, RELOCATION]
+    kind: benefit
+    is_money: true
+    title: 주거이전비 4개월분을 받을 수 있어요
+    plain_body: >
+      이사를 나가야 하는 세입자는 가구원 수에 따라 4개월분의 주거이전비를 보상받을 수 있어요.
+      세입자에게 직접 주는 돈이라 집주인과 따로 받아요. 조합원이 아니어도 받을 수 있는 권리예요.
+    conditions: >
+      정비사업에서는 정비계획 공람공고일을 기준으로, 그때 이 구역 안에서 3개월 이상 살고 있던 세입자가 대상이에요.
+      무허가건축물 세입자는 1년 이상 거주해야 하고, 이주대책 대상인 세입자는 제외돼요.
+    legal_basis: 토지보상법 시행규칙 제54조제2항, 도시정비법 시행령 제54조제4항
+    law_ref: 토지보상법 시행규칙 제54조
+    sort_order: 20
+
+  - id: tenant.moving_cost
+    impl_types: [union, public]
+    stages: [MGMT_DISPOSAL, RELOCATION]
+    kind: benefit
+    is_money: true
+    title: 이사비도 따로 받을 수 있어요
+    plain_body: >
+      주거이전비와 별도로, 구역 밖으로 이사할 때 가재도구를 옮기는 이사비를 법에서 정한 기준으로 보상받을 수 있어요.
+    conditions: 이사비를 받은 뒤 같은 구역 안의 다른 곳으로 이사하면 이사비를 받지 못해요.
+    legal_basis: 토지보상법 시행규칙 제55조제2항, 제3항
+    law_ref: 토지보상법 시행규칙 제55조
+    sort_order: 30
+
+  - id: tenant.deposit_claim
+    impl_types: [union, public]
+    stages: [MGMT_DISPOSAL, RELOCATION]
+    kind: benefit
+    is_money: true
+    title: 보증금을 사업시행자에게도 돌려달라고 할 수 있어요
+    plain_body: >
+      정비사업 때문에 계속 살 수 없게 되면 세입자는 임대차계약을 해지할 수 있어요.
+      이때 보증금을 돌려받을 권리는 집주인뿐 아니라 사업시행자(조합 또는 LH)에게도 쓸 수 있어요.
+    legal_basis: 도시정비법 제70조제1항, 제2항
+    law_ref: 도시정비법 제70조
+    sort_order: 40
+
+  - id: tenant.lease_term_not_protected
+    impl_types: [union, public]
+    stages: [SALE_APPLICATION, MGMT_DISPOSAL, RELOCATION]
+    kind: caution
+    is_money: false
+    title: 관리처분 인가 뒤에는 계약기간 2년 보장이 적용되지 않아요
+    plain_body: >
+      관리처분계획이 인가되면 주택임대차보호법의 최소 계약기간 규정이 적용되지 않아요.
+      계약기간이 남아 있어도 이주해야 할 수 있으니, 보상과 보증금 반환 일정을 미리 확인하세요.
+    legal_basis: 도시정비법 제70조제5항
+    law_ref: 도시정비법 제70조
+    sort_order: 45
+
+  - id: tenant.use_suspension
+    impl_types: [union, public]
+    stages: [MGMT_DISPOSAL, RELOCATION]
+    kind: caution
+    is_money: false
+    title: 관리처분 인가 뒤에는 이사를 준비해야 해요
+    plain_body: >
+      관리처분계획 인가 고시가 나면 세입자도 원칙적으로 지금 사는 집을 계속 쓸 수 없어요.
+      다만 손실보상이 끝나지 않았다면 그때까지는 예외가 인정돼요. 보상 안내를 먼저 확인하세요.
+    legal_basis: 도시정비법 제81조제1항
+    law_ref: 도시정비법 제81조
+    sort_order: 50
+
+  - id: tenant.public_rental
+    impl_types: [union, public]
+    stages: [ZONE_DESIGNATION, PROJECT_APPROVAL, SALE_APPLICATION, MGMT_DISPOSAL, RELOCATION]
+    kind: benefit
+    is_money: false
+    title: 재개발 임대주택 1순위 대상인지 확인하세요
+    plain_body: >
+      성남시는 정비구역 지정을 위한 공람공고일 3개월 전부터 이주하는 날까지 계속 이 구역에 살고 있는
+      무주택 세대주 세입자를 재개발 임대주택 1순위 공급 대상으로 정하고 있어요.
+    conditions: 세대 구성 기준과 신청 시기는 사업시행자의 세입자 대책 안내로 확인해요.
+    legal_basis: 성남시 도시정비 조례 제39조제1항, 제3항, 도시정비법 시행령 별표 3
+    law_ref: 성남시 도시정비 조례 제39조
+    sort_order: 60
+
+  - id: tenant.public_opinion
+    impl_types: [public]
+    stages: [DEVELOPER_DESIGNATION, RESIDENT_COUNCIL, PROJECT_APPROVAL, SALE_APPLICATION, MGMT_DISPOSAL, RELOCATION]
+    kind: todo
+    is_money: false
+    title: 세입자도 이주와 보상 규정에 의견을 낼 수 있어요
+    plain_body: >
+      공공기관이 사업시행자인 구역에서는 세입자도 이주, 주거이전비 같은 보상, 세입자 임대주택 공급에 관한
+      시행규정에 의견을 낼 수 있고, 사업시행자는 이를 반영하도록 노력해야 해요.
+    legal_basis: 도시정비법 제47조제5항
+    law_ref: 도시정비법 제47조
+    sort_order: 70
