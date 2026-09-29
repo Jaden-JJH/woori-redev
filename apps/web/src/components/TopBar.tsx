@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { FontSizeToggle } from "./FontSize";
 import { Icon } from "./Icon";
+import { Logo } from "./Logo";
 import { ShareButton } from "./ShareButton";
 
 export function TopBar({ back }: { back?: { href: string; label: string } }) {
@@ -13,7 +14,7 @@ export function TopBar({ back }: { back?: { href: string; label: string } }) {
         </Link>
       ) : (
         <Link href="/" className="flex items-center gap-2 text-[0.9rem] font-extrabold tracking-tight">
-          <Icon name="home" size={21} className="text-accent" />
+          <Logo size={24} />
           우리동네 재개발 비서
         </Link>
       )}
