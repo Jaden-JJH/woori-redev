@@ -8,22 +8,28 @@ REPO_ROOT = Path(__file__).resolve().parents[2]
 
 
 class Settings(BaseSettings):
-    model_config = SettingsConfigDict(env_file=REPO_ROOT / ".env", env_file_encoding="utf-8", extra="ignore")
+    model_config = SettingsConfigDict(
+        env_file=REPO_ROOT / ".env", env_file_encoding="utf-8", extra="ignore", env_ignore_empty=True
+    )
 
     database_url: str = "postgresql://woori:woori@localhost:54329/woori"
     content_dir: Path = REPO_ROOT / "content"
     raw_dir: Path = REPO_ROOT / "data" / "raw"
 
-    # 셸에 이미 있는 공용 ANTHROPIC_API_KEY 등을 실수로 가져가 다른 계정으로 과금되지 않도록 앱 전용 이름만 읽는다.
-    anthropic_api_key: str | None = Field(default=None, validation_alias=AliasChoices("WOORI_ANTHROPIC_API_KEY"))
+    # 앱 전용 이름이 있으면 그것을, 없으면 셸의 ANTHROPIC_API_KEY 를 쓴다(2026-09-29 사용자 확인).
+    anthropic_api_key: str | None = Field(
+        default=None, validation_alias=AliasChoices("WOORI_ANTHROPIC_API_KEY", "ANTHROPIC_API_KEY")
+    )
     gemini_api_key: str | None = Field(default=None, validation_alias=AliasChoices("WOORI_GEMINI_API_KEY"))
     law_api_oc: str | None = None
 
     # 생성 모델: answer_provider 가 기본, fallback_provider 는 장애 시 대체
     answer_provider: str = "claude"
     fallback_provider: str = "gemini"
-    claude_model: str = "claude-opus-5"
-    claude_analyzer_model: str = "claude-opus-5"
+    # 속도와 품질 균형(2026-09-29 사용자 결정): Sonnet 5, 사고 끔. 측정 평균 약 10초(Haiku 4.5 약 9초, Opus 5 약 39초).
+    claude_model: str = "claude-sonnet-5"
+    claude_analyzer_model: str = "claude-sonnet-5"
+    use_llm_analyzer: bool = False
     gemini_model: str = "gemini-2.5-flash"
     embed_model: str = "gemini-embedding-001"
     embed_dim: int = 768

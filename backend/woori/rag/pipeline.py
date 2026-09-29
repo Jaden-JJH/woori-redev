@@ -5,6 +5,7 @@
 """
 
 import logging
+import re
 import time
 import uuid
 from collections.abc import Callable
@@ -20,6 +21,7 @@ from woori.ingest.tagger import ZoneTagger
 from woori.llm.base import JsonRequest, LlmError
 from woori.llm.router import analyzer_router, answer_router
 from woori.rag import prompts
+from woori.rag.expand import expand
 from woori.rag.retriever import RetrievalResult, get_retriever
 from woori.rag.verifier import verify
 from woori.rag.zone_context import zone_document
@@ -28,6 +30,8 @@ from woori.text import normalize
 log = logging.getLogger(__name__)
 
 MIN_COVERAGE = 0.2
+MAX_POINTS = 4
+STAGE_QUESTION = re.compile(r"몇\s*단계|어디까지|진행\s*상황|언제\s*(났|됐|되|승인|인가|지정|시작)|지금\s*단계")
 ZONE_DOC_ID = "Z"
 ZONE_DOC_LABEL = "우리 구역 진행 현황"
 
@@ -174,43 +178,38 @@ def ask(zone_id: str, resident_type: str, question: str, emit: Emit | None = Non
         base.update(payload)
         return base
 
-    # 게이트1: 규칙 사전
+    # 게이트1: 규칙 사전. 질의 분석 모델은 기본으로 쓰지 않는다(호출 1회 절약). 의미상 판정은 생성 모델이 함께 한다.
     emit("analyze")
     rule_hit = check_rules(question)
-    analysis = _analyze(question)
-    trace["topic"] = analysis.topic
+    analysis = _analyze(question) if get_settings().use_llm_analyzer else None
     trace["gate_scores"]["policy"] = {
         "rule": rule_hit.category if rule_hit else None,
-        "model": analysis.negative_category if analysis.intent == "negative" else None,
-        "analyzer": analysis.source,
+        "analyzer": analysis.negative_category if analysis and analysis.intent == "negative" else None,
     }
-    category = rule_hit.category if rule_hit else (analysis.negative_category if analysis.intent == "negative" else None)
-    if category is None and analysis.intent == "negative":
-        category = "off_topic"
+    category = rule_hit.category if rule_hit else None
+    if category is None and analysis and analysis.intent == "negative":
+        category = analysis.negative_category or "off_topic"
     if category:
         return finish("refused_policy", refusal=refusal_payload(c, category, resident_type))
-    if analysis.intent == "chitchat":
-        return finish("refused_policy", refusal=refusal_payload(c, "off_topic", resident_type,
-                      "안녕하세요. 정비사업 절차나 권리에 대해 궁금한 점을 물어봐 주세요."))
 
     # 다른 구역을 물으면 필터를 몰래 바꾸지 않고 구역을 바꾸도록 안내한다.
     tagger = ZoneTagger(list(c.zones.values()))
-    mentioned = set(tagger.tag(question + " " + " ".join(analysis.mentioned_zones)))
+    mentioned = set(tagger.tag(question))
     if mentioned and zone_id not in mentioned:
         other = c.zones[sorted(mentioned)[0]]
         msg = f"지금 선택한 구역은 {zone.name}이에요. {other.name} 이야기는 구역을 {other.name}으로 바꾼 뒤 물어봐 주세요."
         return finish("refused_other_zone", refusal={**refusal_payload(c, "no_evidence", resident_type, msg),
                                                      "category": "other_zone", "switch_zone_id": other.id})
 
-    # 검색
+    # 검색: 주민 말을 법령 용어로 사전 확장한다.
     emit("retrieve")
-    query = f"{question} {analysis.search_query}".strip()
-    retrieval = get_retriever().search(query, zone_id, extra_terms=analysis.legal_terms)
-    trace["gate_scores"]["retrieval"] = retrieval.signals
+    extra = expand(question) + (analysis.legal_terms if analysis else [])
+    retrieval = get_retriever().search(question, zone_id, extra_terms=extra)
+    trace["gate_scores"]["retrieval"] = {**retrieval.signals, "expanded": extra[:8]}
     trace["chunk_ids"] = [h.chunk.id for h in retrieval.hits]
 
     # 게이트2: 근거 게이트. 구역 진행 질문은 구역 현황 문서가 근거가 되므로 통과시킨다.
-    if analysis.topic != "stage_status" and retrieval.top_coverage < MIN_COVERAGE:
+    if not STAGE_QUESTION.search(question) and retrieval.top_coverage < MIN_COVERAGE:
         return finish("refused_no_evidence", refusal=refusal_payload(c, "no_evidence", resident_type))
 
     # 생성
@@ -223,7 +222,7 @@ def ask(zone_id: str, resident_type: str, question: str, emit: Emit | None = Non
         f"<question>{question}</question>"
     )
     req = JsonRequest(task="answer", system=prompts.ANSWER_SYSTEM, user=user, schema=prompts.ANSWER_SCHEMA,
-                      effort="medium", max_tokens=4096)
+                      effort="low", max_tokens=1600)
     router = answer_router()
     emit("verify")
     for attempt in range(2):
@@ -235,10 +234,15 @@ def ask(zone_id: str, resident_type: str, question: str, emit: Emit | None = Non
             return finish("error")
         trace["model"] = f"{res.provider}:{res.model}"
         out = res.data
+        trace["topic"] = out.get("topic")
+        cat = out.get("category", "in_scope")
+        if cat != "in_scope":
+            trace["gate_scores"]["policy"]["model"] = cat
+            return finish("refused_policy", refusal=refusal_payload(c, cat, resident_type))
         if not out.get("answerable") or not out.get("points"):
             trace["gate_scores"]["answerable"] = False
             return finish("refused_no_evidence", refusal=refusal_payload(c, "no_evidence", resident_type))
-        report = verify(out["points"], doc_texts)
+        report = verify(out["points"][:MAX_POINTS], doc_texts)
         trace["gate_scores"]["verify"] = {
             "attempt": attempt + 1,
             "total": report.total_citations,
@@ -252,8 +256,8 @@ def ask(zone_id: str, resident_type: str, question: str, emit: Emit | None = Non
             system=prompts.ANSWER_SYSTEM,
             user=user + "\n<note>이전 답변의 인용 구절이 문서 원문과 일치하지 않았다. quote 는 문서에서 글자 그대로 복사한다.</note>",
             schema=prompts.ANSWER_SCHEMA,
-            effort="medium",
-            max_tokens=4096,
+            effort="low",
+            max_tokens=1600,
         )
     else:
         return finish("refused_verification", refusal=refusal_payload(c, "no_evidence", resident_type))
@@ -272,6 +276,15 @@ def ask(zone_id: str, resident_type: str, question: str, emit: Emit | None = Non
         "answered",
         summary_plain=out.get("summary_plain"),
         points=points,
-        next_step=out.get("next_step"),
+        next_step=next_action(c, zone, resident_type),
         terms=_glossary_hits(c, text_all),
     )
+
+
+def next_action(c: Content, zone, resident_type: str) -> str | None:
+    """지금 할 일은 모델이 쓰지 않고, 검수된 체크리스트에서 현재 단계의 첫 할 일을 가져온다."""
+    for kind in ("deadline", "todo", "benefit"):
+        for item in c.checklists[resident_type]:
+            if zone.impl_type in item.impl_types and zone.current_stage in item.stages and item.kind == kind:
+                return f"{item.title} (체크리스트에서 자세히 볼 수 있어요)"
+    return None
