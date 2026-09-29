@@ -27,6 +27,9 @@ const PATHS = {
   calendar: "M4 6h16v14H4z M4 10h16 M8 3v5 M16 3v5",
   chevron: "m6 9 6 6 6-6",
   plus: "M12 5v14 M5 12h14",
+  share: "M12 15V3 M7 8l5-5 5 5 M5 12v8h14v-8",
+  link: "M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1 M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1",
+  done: "M5 12.5 10 17l9-10",
 } as const;
 
 export type IconName = keyof typeof PATHS;
