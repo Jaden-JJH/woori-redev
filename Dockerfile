@@ -9,6 +9,8 @@ COPY backend/pyproject.toml backend/uv.lock ./
 RUN uv sync --frozen --no-dev --no-install-project --python /usr/local/bin/python3
 COPY backend/ ./
 COPY content/ /app/content/
+# 시연 질문 녹화 응답(ReplayStore). AI 공급자가 모두 실패할 때만 같은 요청 지문으로 재생한다.
+COPY demo/replay/ /app/data/replay/
 RUN uv sync --frozen --no-dev --python /usr/local/bin/python3
 
 ENV PATH=/app/backend/.venv/bin:$PATH
