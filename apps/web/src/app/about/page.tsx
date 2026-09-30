@@ -48,7 +48,7 @@ export default function AboutPage() {
         </Block>
         <Block icon="book" title="어디서 가져온 정보인가요">
           <ul className="list-disc pl-5">
-            <li>성남시 고시공고 게시판의 정비사업 고시 (매일 확인)</li>
+            <li>성남시 고시공고 게시판의 정비사업 고시 (매일 자동 확인 예정)</li>
             <li>국가법령정보센터의 도시정비법, 토지보상법, 성남시 도시정비 조례 현행 조문</li>
           </ul>
           <p className="mt-2">
